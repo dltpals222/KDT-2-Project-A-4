@@ -5,19 +5,20 @@ function tagMake(tagName = "div", innerHTML = "", tagMore = ""){
 function tagStyle(object){
   let style = 'style='
   for(let key in object){
-    style += `${object}:${object[key]} `
+    style += `${key}:${object[key]} `
   }
   return style
 }
 
 const aaaaa = {
-  'width' :'100px',
-  'height' : '100px',
-  backgroundColor : '#ccc'
+  display : 'flex',
+  alignItems : 'center',
+  justifyContent : 'center'
 }
 
-console.log(tagStyle(aaaaa))
 
-const mainDiv = () => {
-  tagMake('div',"NaR",tagStyle(aaaaa))
-}
+const mainDiv = tagMake('div',"NaR",tagStyle(aaaaa))
+
+module.exports = mainDiv
+
+console.log(mainDiv)

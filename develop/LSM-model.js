@@ -3,22 +3,23 @@ function tagMake(tagName = "div", innerHTML = "", tagMore = ""){
 }
 
 function tagStyle(object){
-  let style = 'style='
+  let style = 'style="'
   for(let key in object){
-    style += `${key}:${object[key]} `
+    style += `${key}:${object[key]};`
   }
+  style += '"'
   return style
 }
 
 const aaaaa = {
+  width : '100vw',
+  height : '100vh',
   display : 'flex',
-  alignItems : 'center',
-  justifyContent : 'center'
+  'align-items' : 'center',
+  'justify-content' : 'center'
 }
 
-
 const mainDiv = tagMake('div',"NaR",tagStyle(aaaaa))
+console.log(mainDiv)
 
 module.exports = mainDiv
-
-console.log(mainDiv)

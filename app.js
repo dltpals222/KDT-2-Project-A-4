@@ -1,18 +1,19 @@
 //require를 통해 http를 가져오기 
 const http = require('http');
+const mainDiv = require('./develop/LSM-model');
 //createServer를 이용하여 서버를 생성
 const server = http.createServer((request,response)=>{
   //매개변수 request의 요청방식을 GET으로 요청
   if(request.method === 'GET'){
     //헤더정보를 내보내기
-    response.writeHead(200,{'Content-Type' : 'text/plain'});
+    response.writeHead(200,{'Content-Type' : 'text/html'});
     /*헤더정보를 text타입을 html로 했을 경우*/
     /*굳이 볼 필요없음 */
     //response.writeHead(200, {'Content-Type' : 'text/html'});
     /*컨텐츠 출력완료 
-    * 컨텐츠 출력방식을 보통과 html백틱방식 두가지로 만듬./
-    response.end('This is Team NAR');
-    /*response.end(`<!DOCTYPE html>
+    * 컨텐츠 출력방식을 보통과 html백틱방식 두가지로 만듬.*/
+    // response.end('This is Team NAR');
+    response.end(`<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
@@ -21,22 +22,9 @@ const server = http.createServer((request,response)=>{
       <title>Example Page</title>
     </head>
     <body>
-      <div id="root"></div>
-      <script>
-        const body = document.querySelector('body');
-        const root = document.getElementById('root');
-        root.style.textAlign = 'center';
-        root.style.display = 'flex';
-        root.style.flexDirection = 'column';
-        root.style.justifyContent = 'center';
-        root.style.alignItems = 'center';
-        root.style.backgroundColor = 'skyblue';
-        root.style.width = '200px';
-        root.style.height = '120px';
-        root.textContent = 'This is Team NAR';
-      </script>
+      <div id="root" style = "width : 100vw; height : 100vh;">${mainDiv}</div>
     </body>
-    </html>`);*/
+    </html>`);
   }
 });
 //서버 포트 대기 요청

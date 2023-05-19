@@ -62,6 +62,7 @@ class CompanyInnerHTML {
 }
 
 
+
 const tagMake1 : string[] = ['div','',tagStyle(divStyle) + 'id=\"DB-view\"']; //root의 자식
 const tagMake2 : string[][] = [['div',"",'id=\"no\"'],['div','','id=\"open\"'],['div','','id=\"high\"'],['div','','id=\"low\"'],['div','','id=\"close\"'],['div','','id=\"volume\"'],['div','','id=\"day\"']]; //7개
 const tagMake3 : string[][] = [['div','',''],['ul','','']]; //2개

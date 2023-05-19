@@ -16,7 +16,7 @@
     "url": "https://github.com/kongukjae/KDT-2-Project-A-4/issues"
   },
   "homepage": "https://github.com/kongukjae/KDT-2-Project-A-4#readme",
-  "dependencies": {
+  "devDependencies": {
     "mariadb": "^3.1.2"
   }
 }

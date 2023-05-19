@@ -4,7 +4,7 @@ function tagMake(tagName: string = "div", innerHTML: string = "", tagMore: strin
   return `<${tagName} ${tagMore}>${innerHTML}</${tagName}>`
 }
 
-function tagStyle(object:{[key:string]:string|number}):string{
+function tagStyle (object:{[key:string]:string|number}):string{
   let style = 'style="'
   for(let key in object){
     style += `${key}:${object[key]};`
@@ -21,26 +21,21 @@ const divStyle : {}= {
   'justify-content' : 'center'
 }
 
-interface tagListInterface {
-  make1 : string[];
-  make2 : string[][];
-  make3 : string[][];
-}
 
-let DBColumn : string="";
-let twoChild : string = "";
-let fourList : string = "";
+
 
 const samsung = fs.readFileSync('../financeDB_testData(samsung).json','utf-8')
 
 console.log(samsung)
 
-const tagList:tagListInterface = {
-  make1 : ['div','',tagStyle(divStyle) + 'id=\"DB-view\"'], //root의 자식
-  make2 : [['div',twoChild,'id=\"no\"'],['div','','id=\"open\"'],['div','','id=\"high\"'],['div','','id=\"low\"'],['div','','id=\"close\"'],['div','','id=\"volume\"'],['div','','id=\"day\"']], //7개
-  make3 : [['div','',''],['ul','','']], //2개
-}
+const tagMake1 : string[] = ['div','',tagStyle(divStyle) + 'id=\"DB-view\"']; //root의 자식
+const tagMake2 : string[][] = [['div',"",'id=\"no\"'],['div','','id=\"open\"'],['div','','id=\"high\"'],['div','','id=\"low\"'],['div','','id=\"close\"'],['div','','id=\"volume\"'],['div','','id=\"day\"']]; //7개
+const tagMake3 : string[][] = [['div','',''],['ul','','']]; //2개
 
+
+let DBColumn : string="";
+let twoChild : string = "";
+let fourList : string = "";
 
 
 tagList.make2.map((element) : void=>{
@@ -53,7 +48,7 @@ tagList.make3.map((Element) : void=>{
 
 
 
-const mainDiv = tagMake(tagList.make1[0],DBColumn,tagList.make1[2])
+const mainDiv = tagMake(tagMake1[0],tagMake1[1],tagMake1[2])
 
 
 module.exports = mainDiv

@@ -13,6 +13,7 @@ function tagStyle (object:{[key:string]:string|number}):string{
   return style
 }
 
+
 const divStyle : {}= {
   width : '100vw',
   height : '100vh',
@@ -21,12 +22,37 @@ const divStyle : {}= {
   'justify-content' : 'center'
 }
 
+interface companyInterface {
+  no : number;
+  open : number;
+  high : number;
+  low : number;
+  close : number;
+  volume : number;
+  day : string;
+}
+
+interface companyParseInterface extends companyInterface{
+  samsung : []
+}
+
+const company = fs.readFileSync('../financeDB_testData(samsung).json','utf-8')
+const companyParse:companyParseInterface = JSON.parse(company)
+const companyInner = companyParse.samsung
+
+console.log(companyInner)
+
+class CompanyInnerHTML {
+  private company : companyInterface;
+
+  constructor(company : companyInterface){
+    this.company = company
+  }
+
+  
+}
 
 
-
-const samsung = fs.readFileSync('../financeDB_testData(samsung).json','utf-8')
-
-console.log(samsung)
 
 const tagMake1 : string[] = ['div','',tagStyle(divStyle) + 'id=\"DB-view\"']; //root의 자식
 const tagMake2 : string[][] = [['div',"",'id=\"no\"'],['div','','id=\"open\"'],['div','','id=\"high\"'],['div','','id=\"low\"'],['div','','id=\"close\"'],['div','','id=\"volume\"'],['div','','id=\"day\"']]; //7개
@@ -38,13 +64,15 @@ let twoChild : string = "";
 let fourList : string = "";
 
 
-tagList.make2.map((element) : void=>{
+
+tagMake3.map((Element) : void=>{
+  twoChild += tagMake(Element[0])
+})
+
+tagMake2.map((element) : void=>{
   DBColumn += tagMake(element[0],twoChild,element[2])
 })
 
-tagList.make3.map((Element) : void=>{
-  twoChild += tagMake(Element[0])
-})
 
 
 

@@ -32,25 +32,32 @@ interface companyInterface {
   day : string;
 }
 
-interface companyParseInterface extends companyInterface{
-  samsung : []
+interface companyParseInterface {
+  samsung : companyInterface[];
 }
 
 const company = fs.readFileSync('../financeDB_testData(samsung).json','utf-8')
 const companyParse:companyParseInterface = JSON.parse(company)
-const companyInner = companyParse.samsung
+const companyInner:companyInterface[] = companyParse.samsung
 
 console.log(companyInner)
 
 class CompanyInnerHTML {
-  private company : companyInterface;
+  private company : companyInterface[];
 
-  constructor(company : companyInterface){
+  constructor(company : companyInterface[]){
     this.company = company
   }
 
-  
+
+  get parseData(){
+    let value:string = "";
+    for(let i in this.company){
+      value += 
+    }
+  }
 }
+
 
 
 

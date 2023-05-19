@@ -42,4 +42,4 @@ async function sendQuery(query) {
   }
 }
 
-export default sendQuery;
+module.exports = sendQuery;

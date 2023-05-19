@@ -10,7 +10,6 @@
     "type": "git",
     "url": "git+https://github.com/kongukjae/KDT-2-Project-A-4.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -18,9 +17,6 @@
   },
   "homepage": "https://github.com/kongukjae/KDT-2-Project-A-4#readme",
   "devDependencies": {
-    "@types/node": "^20.2.1",
-    "mariadb": "^3.1.2",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "mariadb": "^3.1.2"
   }
 }

@@ -27,26 +27,21 @@ interface tagListInterface {
   make3 : string[][];
 }
 
-const jsonParse = fs.readFile('../financeDB_testData(samsung).json',(err,data)=>{
-  if(err){
-    console.error('파일을 받아오는데 에러가 뜹니다.')
-  }
-
-  console.log(data)
-
-})
-
-console.log(jsonParse)
-
-const tagList:tagListInterface = {
-  make1 : ['div','',tagStyle(divStyle) + 'id=\"DB-view\"'], //root의 자식
-  make2 : [['div','','id=\"no\"'],['div','','id=\"open\"'],['div','','id=\"high\"'],['div','','id=\"low\"'],['div','','id=\"close\"'],['div','','id=\"volume\"'],['div','','id=\"day\"']], //7개
-  make3 : [['div'],['ul']], //2개
-}
-
 let DBColumn : string="";
 let twoChild : string = "";
 let fourList : string = "";
+
+const samsung = fs.readFileSync('../financeDB_testData(samsung).json','utf-8')
+
+console.log(samsung)
+
+const tagList:tagListInterface = {
+  make1 : ['div','',tagStyle(divStyle) + 'id=\"DB-view\"'], //root의 자식
+  make2 : [['div',twoChild,'id=\"no\"'],['div','','id=\"open\"'],['div','','id=\"high\"'],['div','','id=\"low\"'],['div','','id=\"close\"'],['div','','id=\"volume\"'],['div','','id=\"day\"']], //7개
+  make3 : [['div','',''],['ul','','']], //2개
+}
+
+
 
 tagList.make2.map((element) : void=>{
   DBColumn += tagMake(element[0],twoChild,element[2])

@@ -58,7 +58,8 @@ class CompanyInnerHTML {
   }
 }
 
-
+  
+}
 
 
 const tagMake1 : string[] = ['div','',tagStyle(divStyle) + 'id=\"DB-view\"']; //root의 자식

@@ -1,7 +1,14 @@
 //require를 통해 http를 가져오기
 const http = require("http");
-const mainDiv = require("./LSM-model");
+const fs = require("fs");
 //createServer를 이용하여 서버를 생성
+const jsonData = fs.readFileSync(
+  "../financeDB_testData(samsung).json",
+  "utf-8"
+);
+const samsungData = JSON.parse(jsonData);
+const samsungNoData = samsungData.samsung.map((value) => [value.no]);
+console.log(samsungNoData);
 const server = http.createServer((request, response) => {
   //매개변수 request의 요청방식을 GET으로 요청
   if (request.method === "GET") {
@@ -22,7 +29,7 @@ const server = http.createServer((request, response) => {
       <title>Example Page</title>
     </head>
     <body>
-      <div id="root" style = "width : 100vw; height : 100vh;">${mainDiv}</div>
+      <div id="root" style = "width : 100vw; height : 100vh;"> NO.${samsungNoData}</div>
     </body>
     </html>`);
   }

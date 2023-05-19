@@ -17,9 +17,9 @@ async function sendQuery(query) {
     // 계정명, 자신의 DB 내 계정으로 변경할 것.
     "user": "root", 
     // 패스워드, 자신의 DB 계정 패스워드로 변경할 것.
-    "password":"qwe123", 
+    "password":"1q2w3e4r", 
     //포트, 자신이 쓰는 DB서버에 설정된 포트번호를 쓸 것.
-    "port": 3306,  
+    "port": 3307,  
     "database":"aitrading_db",
     "connectionLimit": 5
   }

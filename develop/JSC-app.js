@@ -7,8 +7,8 @@ const jsonData = fs.readFileSync(
   "utf-8"
 );
 const samsungData = JSON.parse(jsonData);
-const samsungNoData = samsungData.samsung.map((value) => [value.no]);
-console.log(samsungNoData);
+const samsungData_NO = samsungData.samsung.map((value) => [value.no + "\n"]);
+console.log(samsungData_NO);
 const server = http.createServer((request, response) => {
   //매개변수 request의 요청방식을 GET으로 요청
   if (request.method === "GET") {
@@ -29,7 +29,15 @@ const server = http.createServer((request, response) => {
       <title>Example Page</title>
     </head>
     <body>
-      <div id="root" style = "width : 100vw; height : 100vh;"> NO.${samsungNoData}</div>
+      <div id="root" style = "width : 100vw; height : 100vh;"> 
+        <div>NO.${samsungData_NO}</div>
+        <div>NO.${samsungData_NO}</div>
+        <div>NO.${samsungData_NO}</div>
+        <div>NO.${samsungData_NO}</div>
+        <div>NO.${samsungData_NO}</div>
+        <div>NO.${samsungData_NO}</div>
+        <div>NO.${samsungData_NO}</div>
+      </div>
     </body>
     </html>`);
   }

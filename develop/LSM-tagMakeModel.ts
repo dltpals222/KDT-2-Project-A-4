@@ -37,16 +37,17 @@ interface companyParseInterface {
   samsung : companyInterface[];
 }
 
-const company = fs.readFileSync('../financeDB_testData(samsung).json','utf-8')
+const company = fs.readFileSync(path.join(path.resolve(),'../financeDB_testData(samsung).json'),'utf-8')
+// const company = fs.readFileSync(path.join(path.resolve(),'financeDB_testData(samsung).json'),'utf-8')
 const companyParse:companyParseInterface = JSON.parse(company)
 const companyInner:companyInterface[] = companyParse.samsung
-const companyNo = companyInner.map((value) => {value.no});
-const companyOpen = companyInner.map((value) => {value.open});
-const companyHigh = companyInner.map((value) => {value.high});
-const companyLow = companyInner.map((value) => {value.low});
-const companyClose = companyInner.map((value) => {value.close});
-const companyVolume = companyInner.map((value) => {value.volume});
-const companyDay  = companyInner.map((value) => {value.day});
+const companyNo : number[] = companyInner.map((value) => value.no);
+const companyOpen : number[] = companyInner.map((value) => value.open);
+const companyHigh : number[] = companyInner.map((value) => value.high);
+const companyLow : number[] = companyInner.map((value) => value.low);
+const companyClose : number[] = companyInner.map((value) => value.close);
+const companyVolume : number[] = companyInner.map((value) => value.volume);
+const companyDay : string[] = companyInner.map((value) => value.day);
 
 
 const tagMake1 : string[] = ['div','',tagStyle(divStyle) + 'id=\"DB-view\"']; //root의 자식
@@ -55,14 +56,35 @@ const tagMake3Text : string[] = ['no','open','high','low','close','volume','day'
 const tagMake3CompanyData = [companyNo,companyOpen,companyHigh,companyLow,companyClose,companyVolume,companyDay]
 
 let DBColumn : string="";
-let twoChild : string = "";
-let fourList : string = "";
 
 
+const companyInfo = (company : (string|number)[],count:number = -1) => {
+  let fourList : string = "";
+  if(count === -1){
+    for(let i in company){
+      company.map(element => {fourList += tagMake('li',company.toString())})
+    }
+  } else {
+    for (let i =0;i<count;i++){
+      fourList += tagMake('li',company.toString())
+    }
+  }
+  return fourList
+}
+console.log(companyInfo(companyClose))
+
+
+const wantCompanyInfo = (companyInfo:[],count:number) => {
+  let twoChild : string = "";
+    tagMake3Text.map((element,i) => {
+        twoChild += tagMake('div',)
+        twoChild += tagMake('div')
+    })
+}
 
 
 tagMake2.map((element) : void=>{
-  DBColumn += tagMake(element[0],twoChild,element[2])
+  DBColumn += tagMake(element[0],"",element[2])
 })
 
 

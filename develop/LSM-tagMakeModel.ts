@@ -36,8 +36,8 @@ interface companyParseInterface {
   samsung: companyInterface[];
 }
 
-const company = fs.readFileSync(path.join(path.resolve(), "../financeDB_testData(samsung).json"), "utf-8");
-// const company = fs.readFileSync(path.join(path.resolve(),'financeDB_testData(samsung).json'),'utf-8')
+// const company = fs.readFileSync(path.join(path.resolve(), "../financeDB_testData(samsung).json"), "utf-8");
+const company = fs.readFileSync(path.join(path.resolve(), "financeDB_testData(samsung).json"), "utf-8");
 const companyParse: companyParseInterface = JSON.parse(company);
 const companyInner: companyInterface[] = companyParse.samsung;
 const companyNo: number[] = companyInner.map((value) => value.no);
@@ -60,6 +60,7 @@ const tagMake2: string[][] = [
 ]; //7개
 type CompanyArrayType = number[] | string[];
 
+const tagMake3Text: string[] = ["no", "open", "high", "low", "close", "volume", "day"];
 const tagMake3CompanyData: CompanyArrayType[] = [
   companyNo,
   companyOpen,
@@ -69,9 +70,6 @@ const tagMake3CompanyData: CompanyArrayType[] = [
   companyVolume,
   companyDay,
 ];
-
-let DBColumn: string = "";
-// console.log(tagMake3CompanyData[0]);
 
 const companyInfoAll = (company: CompanyArrayType, count: number = -1): string => {
   let fourList: string = "";
@@ -91,19 +89,16 @@ const companyInfoAll = (company: CompanyArrayType, count: number = -1): string =
   return fourList;
 };
 
-const wantCompanyInfo = (companyInfo: CompanyArrayType, count: number = -1): string => {
+const wantCompanyInfo = (company: CompanyArrayType, count: number = -1): string => {
   let twoChild: string = "";
-  const tagMake3Text: string[] = ["no", "open", "high", "low", "close", "volume", "day"];
-  twoChild += tagMake("div", tagMake3Text);
-  twoChild += tagMake("ul", companyInfoAll(companyInfo, count));
+  tagMake3Text.map((element) => {
+    twoChild += tagMake("div", element);
+    twoChild += tagMake("ul", companyInfoAll(company, count));
+  });
   return twoChild;
 };
-console.log(wantCompanyInfo(tagMake3CompanyData[0], 10));
 
-tagMake2.map((element): void => {
-  DBColumn += tagMake(element[0], "", element[2]);
-});
-
-const mainDiv = tagMake(tagMake1[0], tagMake1[1], tagMake1[2]);
+const mainDiv = tagMake(tagMake1[0], wantCompanyInfo(tagMake3CompanyData[0], 10), tagMake1[2]);
+console.log(mainDiv);
 
 module.exports = mainDiv;

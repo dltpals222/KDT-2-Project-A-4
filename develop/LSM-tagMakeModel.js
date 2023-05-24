@@ -77,8 +77,8 @@ var wantCompanyInfo = function (company, count) {
     if (count === void 0) { count = -1; }
     var twoChild = "";
     tagMake3Text.map(function (element, i) {
-        twoChild += tagMake("div", tagMake("div", element) +
-            tagMake("ul", companyInfoAll(company[i], count), tagStyle({ "list-style-type": "none", padding: 0, margin: 0 })), tagStyle({ border: "1px solid black", padding: "1.5%" }));
+        twoChild += tagMake(tagMake2[i][0], tagMake("div", element) +
+            tagMake("ul", companyInfoAll(company[i], count), tagStyle({ "list-style-type": "none", padding: 0, margin: 0 })), tagMake2[i][2] + tagStyle({ border: "1px solid black", padding: "1.5%" }));
     });
     return twoChild;
 };

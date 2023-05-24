@@ -93,14 +93,14 @@ const wantCompanyInfo = (company: CompanyArrayType[], count: number = -1): strin
   let twoChild: string = "";
   tagMake3Text.map((element, i) => {
     twoChild += tagMake(
-      "div",
+      tagMake2[i][0],
       tagMake("div", element) +
         tagMake(
           "ul",
           companyInfoAll(company[i], count),
           tagStyle({ "list-style-type": "none", padding: 0, margin: 0 })
         ),
-      tagStyle({ border: "1px solid black", padding: "1.5%" })
+      tagMake2[i][2] + tagStyle({ border: "1px solid black", padding: "1.5%" })
     );
   });
   return twoChild;

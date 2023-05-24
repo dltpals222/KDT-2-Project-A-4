@@ -91,13 +91,18 @@ console.log(companyInfo(companyClose));
 const wantCompanyInfo = (company: CompanyArrayType, count: number = -1): string => {
   let twoChild: string = "";
   tagMake3Text.map((element) => {
-    twoChild += tagMake("div", element);
-    twoChild += tagMake("ul", companyInfoAll(company, count));
+    twoChild += tagMake(
+      "div",
+      tagMake("div", element) +
+        tagMake("ul", companyInfoAll(company, count), tagStyle({ "list-style-type": "none", padding: 0, margin: 0 })),
+      tagStyle({ border: "1px solid black", padding: "1.5%" })
+    );
+    // twoChild += tagMake("div", element);
+    // twoChild += tagMake("ul", companyInfoAll(company, count));
   });
   return twoChild;
 };
 
 const mainDiv = tagMake(tagMake1[0], wantCompanyInfo(tagMake3CompanyData[0], 10), tagMake1[2]);
-console.log(mainDiv);
 
 module.exports = mainDiv;

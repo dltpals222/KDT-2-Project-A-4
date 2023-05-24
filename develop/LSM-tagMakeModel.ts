@@ -76,17 +76,18 @@ const companyInfoAll = (company: CompanyArrayType, count: number = -1): string =
   if (count === -1) {
     for (let i in company) {
       company.map((element) => {
-        fourList += tagMake("li", company.toString());
+        fourList += tagMake("li", element.toString());
       });
     }
   } else {
-    for (let i = 0; i < count; i++) {
-      fourList += tagMake("li", company.toString());
-    }
+    company.map((ele, i) => {
+      if (count > i) {
+        fourList += tagMake("li", ele.toString());
+      }
+    });
   }
   return fourList;
 };
-console.log(companyInfo(companyClose));
 
 const wantCompanyInfo = (company: CompanyArrayType, count: number = -1): string => {
   let twoChild: string = "";

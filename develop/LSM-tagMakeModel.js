@@ -76,11 +76,11 @@ var companyInfoAll = function (company, count) {
 var wantCompanyInfo = function (company, count) {
     if (count === void 0) { count = -1; }
     var twoChild = "";
-    tagMake3Text.map(function (element) {
+    tagMake3Text.map(function (element, i) {
         twoChild += tagMake("div", tagMake("div", element) +
-            tagMake("ul", companyInfoAll(company, count), tagStyle({ "list-style-type": "none", padding: 0, margin: 0 })), tagStyle({ border: "1px solid black", padding: "1.5%" }));
+            tagMake("ul", companyInfoAll(company[i], count), tagStyle({ "list-style-type": "none", padding: 0, margin: 0 })), tagStyle({ border: "1px solid black", padding: "1.5%" }));
     });
     return twoChild;
 };
-var mainDiv = tagMake(tagMake1[0], wantCompanyInfo(tagMake3CompanyData[0], 10), tagMake1[2]);
+var mainDiv = tagMake(tagMake1[0], wantCompanyInfo(tagMake3CompanyData, 10), tagMake1[2]);
 module.exports = mainDiv;

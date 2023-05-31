@@ -16,7 +16,12 @@
     "url": "https://github.com/kongukjae/KDT-2-Project-A-4/issues"
   },
   "homepage": "https://github.com/kongukjae/KDT-2-Project-A-4#readme",
+  "type": "module",
   "devDependencies": {
     "mariadb": "^3.1.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
   }
 }

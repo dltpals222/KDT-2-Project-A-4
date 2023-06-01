@@ -11,13 +11,13 @@ const stylesHandler = 'style-loader';
 
 
 const config = {
-    entry: './src/app.js',
+    entry: './src/app.tsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname,'src/index.html'),
+            template: 'index.html',
         }),
 
         // Add your plugins here
@@ -26,8 +26,9 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/i,
-                loader: 'babel-loader',
+                test: /\.(ts|tsx)$/i,
+                loader: 'ts-loader',
+                exclude: ['/node_modules/'],
             },
             {
                 test: /\.css$/i,
@@ -41,6 +42,9 @@ const config = {
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
     },
 };
 

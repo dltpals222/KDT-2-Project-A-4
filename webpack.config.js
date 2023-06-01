@@ -11,13 +11,13 @@ const stylesHandler = 'style-loader';
 
 
 const config = {
-    entry: './src/app.tsx',
+    entry: path.resolve(__dirname,'./src/app.tsx'),
     output: {
         path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'index.html',
+            template: path.resolve(__dirname,"./src/index.html")
         }),
 
         // Add your plugins here

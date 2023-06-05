@@ -8,12 +8,14 @@ const app = express();
 // app.use("요청 주소명", 콜백함수),
 // 여기에 정적 파일을 응답할 수 있게 설정가능한데 방식은 다음과 같다.
 // app.use(express.static("경로명"));
+// dist 폴더내 정적 파일 사용 설정
+app.use(express.static(path.join(__dirname,'develop','dist')))
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "dist", "index.html"));
+    res.sendFile(path.join(__dirname, 'develop', 'dist', "index.html"));
 });
 
 app.get("/main.js", (req, res) => {
-    res.sendFile(path.join(__dirname, "dist", "main.js"));
+    res.sendFile(path.join(__dirname, 'develop', "dist", "main.js"));
 });
 
 app.listen(3000, () => {

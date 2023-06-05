@@ -1,23 +1,23 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import { fileURLToPath } from 'url';
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const isProduction = process.env.NODE_ENV == 'production';
 
-
 const stylesHandler = 'style-loader';
 
-
-
 const config = {
-    entry: path.resolve(__dirname,'develop','app.tsx'),
+    entry: path.resolve(__dirname, 'develop', 'router.tsx'),
     output: {
         path: path.resolve(__dirname, 'develop', 'dist'),
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname,'develop', 'index.html')
+            template: path.resolve(__dirname, 'develop', 'index.html')
         }),
 
         // Add your plugins here
@@ -32,7 +32,7 @@ const config = {
             },
             {
                 test: /\.css$/i,
-                use: [stylesHandler,'css-loader'],
+                use: [stylesHandler, 'css-loader'],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
@@ -46,15 +46,16 @@ const config = {
     resolve: {
         extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
     },
+
 };
 
-module.exports = () => {
+const createWebpackConfig = () => {
     if (isProduction) {
         config.mode = 'production';
-        
-        
     } else {
         config.mode = 'development';
     }
     return config;
 };
+
+export default createWebpackConfig;

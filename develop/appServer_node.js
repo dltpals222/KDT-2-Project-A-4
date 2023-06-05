@@ -1,6 +1,6 @@
 //require를 통해 http를 가져오기 
 const http = require('http');
-const mainDiv = require('./develop/LSM-model');
+const mainDiv = require('./LSM-model');
 //createServer를 이용하여 서버를 생성
 const server = http.createServer((request,response)=>{
   //매개변수 request의 요청방식을 GET으로 요청

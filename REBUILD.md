@@ -17,3 +17,4 @@
 설치시, 이하의 목록들 이외에는 모두 devDependencies로 설치할 것.(이외 모듈들은 개발 환경에서만 쓰며 프로젝트 실행때 필요하지 않기 때문임.)
 1. express
 2. react, react-dom, react-router-dom
+3. mariadb

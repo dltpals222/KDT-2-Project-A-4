@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kongukjae/KDT-2-Project-A-4/issues"
   },
-  "homepage": "https://github.com/kongukjae/KDT-2-Project-A-4#readme"
+  "homepage": "https://github.com/kongukjae/KDT-2-Project-A-4#readme",
+  "dependencies": {
+    "typescript": "^5.1.3"
+  }
 }

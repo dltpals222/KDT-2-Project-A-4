@@ -1,4 +1,6 @@
 import * as React from "react";
+import {createRoot} from "react-dom/client";
+
 
 function App() {
     return (
@@ -6,3 +8,6 @@ function App() {
         </React.StrictMode>
     )
 }
+
+const root = createRoot(document.createElement('root'));
+root.render(<App />);

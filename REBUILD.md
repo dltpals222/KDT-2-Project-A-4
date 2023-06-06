@@ -2,10 +2,11 @@
 
 설치 할 목록 및 순서
 1. TypeScript
-2. React, React-DOM, React-Router-DOM
-3. Webpack
-4. express
-5. mariadb
+2. Webpack
+3. express
+4. mariadb
+5. React, React-DOM, React-Router-DOM
+
 
 이후 추가로 설치해야 할 목록에 대해선 아래 추가할 것.
 

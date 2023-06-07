@@ -13,12 +13,12 @@ function App() : FCReactNode {
         <React.StrictMode>
             <BrowserRouter>
             <Routes>
-                <Route path="/" element="Test" />
+                <Route path="/" element={<Test />} />
             </Routes>
             </BrowserRouter>  
         </React.StrictMode>
     )
 }
 
-const root = createRoot(document.createElement('root'));
+const root = createRoot(document.getElementById('root')!);
 root.render(<App />);

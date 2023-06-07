@@ -7,7 +7,7 @@ const config = {
         rules : [
             //TS로더
             {
-                test: /\.(ts|tsx)$/,
+                test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: "ts-loader",
             },
@@ -15,7 +15,7 @@ const config = {
         ],
     },
     resolve: {
-        extensions: [".ts",".js"],
+        extensions: [".tsx",".ts",".js"],
     },
     output: {
         filename: 'main.js',

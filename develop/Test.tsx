@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Test() {
+function Test() : JSX.Element {
     return (
         <div>
             <h1>Hello World!</h1>

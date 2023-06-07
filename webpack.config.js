@@ -1,13 +1,7 @@
-import {fileURLToPath} from "url";
-import path from "path";
-
-// config파일 경로 읽기.
-const filepath = fileURLToPath(import.meta.url);
-// 루트 경로 읽기.(config가 root위치에 있기에 사용가능한 설정)
-const rootpath = path.dirname(filepath);
+const path = require("path");
 
 const config = {
-    entry: path.join(rootpath,"develop","index.ts"),
+    entry: path.resolve(__dirname,"develop","testReact.tsx"),
     mode: "development",
     module : {
         rules : [
@@ -25,8 +19,8 @@ const config = {
     },
     output: {
         filename: 'main.js',
-        path: path.join(rootpath,"dist")
+        path: path.resolve(__dirname,"dist")
     }
 };
 
-export default config;
+module.exports = config;

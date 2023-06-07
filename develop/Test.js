@@ -24,14 +24,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(require("react"));
-var client_1 = require("react-dom/client");
-var react_router_dom_1 = require("react-router-dom");
-// 함수형 컴포넌트
-function App() {
-    return (React.createElement(React.StrictMode, null,
-        React.createElement(react_router_dom_1.BrowserRouter, null,
-            React.createElement(react_router_dom_1.Routes, null,
-                React.createElement(react_router_dom_1.Route, { path: "/", element: "Test" })))));
+function Test() {
+    return (React.createElement("div", null,
+        React.createElement("h1", null, "Hello World!"),
+        React.createElement("p", null, "\uD14C\uC2A4\uD2B8\uC6A9 \uD398\uC774\uC9C0\uC785\uB2C8\uB2E4. \uC544\uB798 \uC22B\uC790\uAC00 \uBCF4\uC774\uC2DC\uB098\uC694?"),
+        React.createElement("p", null, "2023-06-07")));
 }
-var root = (0, client_1.createRoot)(document.createElement('root'));
-root.render(React.createElement(App, null));
+exports.default = Test;

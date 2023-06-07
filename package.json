@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kongukjae/KDT-2-Project-A-4#readme",
   "devDependencies": {
+    "@babel/core": "^7.22.1",
     "@types/express": "^4.17.17",
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.8",

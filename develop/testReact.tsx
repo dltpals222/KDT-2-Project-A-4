@@ -12,9 +12,9 @@ function App() : FCReactNode {
     return (
         <React.StrictMode>
             <BrowserRouter>
-            <Routes>
+            
                 <Route path="/" element={<Test /> as JSX.Element} />
-            </Routes>
+            
             </BrowserRouter>  
         </React.StrictMode>
     )

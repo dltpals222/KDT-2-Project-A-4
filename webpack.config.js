@@ -11,6 +11,12 @@ const clientConfig = {
                 exclude: /node_modules/,
                 use: "ts-loader",
             },
+            //바벨로더
+            {
+                test: /\.(tsx?|js)$/,
+                exclude: /node_modules/,
+                use: "babel-loader"
+            }
 
         ],
     },

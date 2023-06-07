@@ -1,6 +1,6 @@
 const path = require("path");
 
-const config = {
+const clientConfig = {
     entry: path.resolve(__dirname, "develop", "testReact.tsx"),
     mode: "development",
     module: {
@@ -21,10 +21,32 @@ const config = {
         filename: "main.js",
         path: path.resolve(__dirname, "dist")
     },
+};
+const serverConfig = {
+    entry: path.resolve(__dirname, "develop", "server", "appServer.ts"),
+    mode: "development",
+    module: {
+        rules: [
+            //TS로더
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: "ts-loader",
+            },
+
+        ],
+    },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js"],
+    },
+    output: {
+        filename: "server_bundle.js",
+        path: path.resolve(__dirname, "dist")
+    },
     target: "node",
     externals: {
         express: "commonjs express",
     }
 };
 
-module.exports = config;
+module.exports = [clientConfig, serverConfig];

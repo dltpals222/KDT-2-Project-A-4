@@ -17,3 +17,5 @@
 1. express
 2. react, react-dom, react-router-dom
 3. mariadb
+
+추가 - ESM 방식을 사용하기에 package.json에 types:module을 추가했으나, 테스트 결과 트랜스파일하여 사용하다보니 굳이 적용할 필요가 없음을 확인, 그렇기에 package의 types:module을 삭제하기로 결정함.

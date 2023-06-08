@@ -14,7 +14,9 @@ function LoginPage(){
             <label htmlFor='password'>
                 <input type="password" id='password' placeholder='password를 입력하세요' name='password' value={pwd} onChange={(e) => setPwd(e.target.value)} />
             </label>
+            <button type="submit">로그인</button>
         </form>
+        <button type="button">회원가입</button>
     </div>
     )
 }

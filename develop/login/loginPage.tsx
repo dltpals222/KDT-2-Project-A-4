@@ -6,12 +6,14 @@ function LoginPage(){
 
     return(
     <div>
-        <label htmlFor="id">
-            <input type="text" id="id" placeholder="ID를 입력하세요" name="id" value={} onChange={} />
-        </label>
-        <label htmlFor='password'>
-            <input type="password" id='password' placeholder='password를 입력하세요' name='password' value={} onChange={} />
-        </label>
+        <form>
+            <label htmlFor="id">
+                <input type="text" id="id" placeholder="ID를 입력하세요" name="id" value={id} onChange={(e) => setId(e.target.value)} />
+            </label>
+            <label htmlFor='password'>
+                <input type="password" id='password' placeholder='password를 입력하세요' name='password' value={pwd} onChange={(e) => setPwd(e.target.value)} />
+            </label>
+        </form>
     </div>
     )
 }

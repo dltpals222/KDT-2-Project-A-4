@@ -1,62 +1,58 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
+const path = require("path");
 
-import { fileURLToPath } from 'url';
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const isProduction = process.env.NODE_ENV == 'production';
-
-const stylesHandler = 'style-loader';
-
-const config = {
-    entry: path.resolve(__dirname, 'develop', 'router.tsx'),
-    output: {
-        path: path.resolve(__dirname, 'develop', 'dist'),
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'develop', 'index.html')
-        }),
-
-        // Add your plugins here
-        // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-    ],
+const clientConfig = {
+    entry: path.resolve(__dirname, "develop", "testReact.tsx"),
+    mode: "development",
     module: {
         rules: [
-
+            //TS로더
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: "ts-loader",
+            },
+            //바벨로더
             {
                 test: /\.(tsx?|js)$/,
                 exclude: /node_modules/,
-                use: 'babel-loader',
-            },
-            {
-                test: /\.css$/i,
-                use: [stylesHandler, 'css-loader'],
-            },
-            {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-                type: 'asset',
-            },
+                use: "babel-loader"
+            }
 
-            // Add your rules for custom modules here
-            // Learn more about loaders from https://webpack.js.org/loaders/
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+        extensions: [".tsx", ".ts", ".js"],
     },
-
+    output: {
+        filename: "main.js",
+        path: path.resolve(__dirname, "dist")
+    },
 };
+const serverConfig = {
+    entry: path.resolve(__dirname, "develop", "server", "appServer.ts"),
+    mode: "development",
+    module: {
+        rules: [
+            //TS로더
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: "ts-loader",
+            },
 
-const createWebpackConfig = () => {
-    if (isProduction) {
-        config.mode = 'production';
-    } else {
-        config.mode = 'development';
+        ],
+    },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js"],
+    },
+    output: {
+        filename: "server_bundle.js",
+        path: path.resolve(__dirname, "dist")
+    },
+    target: "node",
+    externals: {
+        express: "commonjs express",
     }
-    return config;
 };
 
-export default createWebpackConfig;
+module.exports = [clientConfig, serverConfig];

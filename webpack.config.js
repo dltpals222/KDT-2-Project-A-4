@@ -17,7 +17,6 @@ const clientConfig = {
                 exclude: /node_modules/,
                 use: "ts-loader",
             },
-            
             {
                 test:/\.css$/,
                 use:["style-loader","css-loader"]

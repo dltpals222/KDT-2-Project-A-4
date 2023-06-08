@@ -6,6 +6,7 @@ function LoginPage(){
 
     return(
     <div>
+        <div id="logo">운에 맡겨라! 모의투자</div>
         <form>
             <label htmlFor="id">
                 <input type="text" id="id" placeholder="ID를 입력하세요" name="id" value={id} onChange={(e) => setId(e.target.value)} />

@@ -14,8 +14,8 @@ function App(): FCReactNode {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Test />} />
-          <Route path="/login" element={<LoginPage />} />
+          {/* <Route path="/" element={<Test />} /> */}
+          <Route path="/" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

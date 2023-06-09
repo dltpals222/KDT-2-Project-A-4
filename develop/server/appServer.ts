@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import path from "path";
 import { getUserInfo, setUserInfo } from "./loginInfo";
+import mariadb from "../db/mariadb"
 
 // 익스프레스 앱서버 시작.
 const app = express();

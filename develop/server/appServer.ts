@@ -48,7 +48,7 @@ app.post("/signup", async (req: Request, res: Response) => {
     res.status(500).json({ success: false, reason: "서버 오류" });
   } finally {
     if (connection) {
-      connection.release();
+      connection.end();
     }
   }
 });
@@ -78,7 +78,7 @@ app.post("/login", async (req: Request, res: Response) => {
     console.error(error);
   } finally {
     if(connection){
-      connection.release();
+      connection.end();
     }
   }
 });

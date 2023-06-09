@@ -28,7 +28,7 @@ class companyDayVolume {
 
   get dayVolume() : CompanyDateType {
     return {
-      day : this.company.samsung.map((value) => value.day),
+      day : this.company.samsung.map((value) => new Date(value.day)),
       volume : this.company.samsung.map((value)=>value.volume)
     }
   }
@@ -41,4 +41,5 @@ const NCDate = new companyDayVolume(NC).dayVolume
 const LGDate = new companyDayVolume(LG).dayVolume
 
 
-
+// console.log(new Date(samsung.samsung[0].day))
+console.log(new Date(samsungDate.day[0]).setFullYear)

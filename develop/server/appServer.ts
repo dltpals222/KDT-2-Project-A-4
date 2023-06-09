@@ -53,20 +53,33 @@ app.post("/signup", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/login", (req: Request, res: Response) => {
+app.post("/login", async (req: Request, res: Response) => {
   const data = req.body;
 
-  const userInfo = getUserInfo();
-  const user = userInfo.find((u) => u.userid === data.id);
-  if (user === undefined) {
-    console.log("로그인 실패! 일치하는 아이디 없음.");
-    res.json({ success: false, reason: "일치하는 아이디가 없습니다." });
-  } else if (user && user.userpwd === data.pwd) {
-    console.log("로그인 성공!");
-    res.json({ success: true, userId: data.id });
-  } else {
-    console.log("로그인 실패!");
-    res.json({ success: false, reason: "암호가 일치하지 않습니다." });
+  let connection : PoolConnection | undefined;
+  
+  try{
+    connection = await connectToMariaDB();
+    const query = `SELECT * FROM userinfo WHERE userid = '${data.id}'`;
+    const result = await runQuery(connection, query);
+
+    if (result.length > 0) {
+      console.log("로그인 실패! 일치하는 아이디 없음.");
+      res.json({ success: false, reason: "일치하는 아이디가 없습니다." });
+    } else if (result[0].userid = data.id && result[0].userpwd === data.pwd) {
+      console.log("로그인 성공!");
+      res.json({ success: true, userId: data.id });
+    } else {
+      console.log("로그인 실패!");
+      res.json({ success: false, reason: "암호가 일치하지 않습니다." });
+    }
+
+  } catch(error) {
+    console.error(error);
+  } finally {
+    if(connection){
+      connection.release();
+    }
   }
 });
 // 서버 실행

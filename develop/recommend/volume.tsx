@@ -20,3 +20,26 @@ type CompanySamsungType = {
   day : string,
 }
 
+class companyDayVolume {
+  private company : {samsung : CompanySamsungType[]};
+  constructor(company : {samsung : CompanySamsungType[]}){
+    this.company = company
+  }
+
+  get dayVolume() : CompanyDateType {
+    return {
+      day : this.company.samsung.map((value) => new Date(value.day)),
+      volume : this.company.samsung.map((value)=>value.volume)
+    }
+  }
+} 
+
+const samsungDate = new companyDayVolume(samsung).dayVolume
+const hanhwaDate = new companyDayVolume(hanhwa).dayVolume
+const hyundaiDate = new companyDayVolume(hyundai).dayVolume
+const NCDate = new companyDayVolume(NC).dayVolume
+const LGDate = new companyDayVolume(LG).dayVolume
+
+
+// console.log(new Date(samsung.samsung[0].day))
+console.log(new Date(samsungDate.day[0]).setFullYear)

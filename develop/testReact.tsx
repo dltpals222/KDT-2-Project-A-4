@@ -18,8 +18,8 @@ function App(): FCReactNode {
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<Test />} /> */}
-          {/* <Route path="/" element={<LoginPage />} /> */}
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/main" element={<MainPage />} />
           <Route path="/luckpage" element={<LuckPage />} />
           <Route path="/search" element={<SearchPage />} />
         </Routes>

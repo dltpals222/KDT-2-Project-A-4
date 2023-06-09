@@ -57,19 +57,19 @@ function DrawEvent() {
             />
           </div>
         ))}
-        <button type="submit">확인</button>
-      </form>
       <button type="button" onClick={handleCreate}>
         종목 생성
       </button>
       <button type="button" onClick={handleDelete}>
         종목 삭제
       </button>
+        <button type="submit">확인</button>
+      </form>
       <div >
       {outputs.map((output, index) => (
         <div key={index}>입력한 주식 종목: {output}</div>
       ))}
-        <PropsComponent stock={handleRandomStocks[randomIndex]} />
+        {/* <PropsComponent stock={handleRandomStocks[randomIndex]} /> */}
       </div>
     </div>
   );

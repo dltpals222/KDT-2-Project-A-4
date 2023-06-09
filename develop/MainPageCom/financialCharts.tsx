@@ -15,6 +15,15 @@ const data : DataPoint[] =[
   {date : new Date('2021-01-03'), price : 120},
   {date : new Date('2021-01-04'), price : 190},
   {date : new Date('2021-01-05'), price : 180},
+  {date : new Date('2021-01-06'), price : 170},
+  {date : new Date('2021-01-07'), price : 200},
+  {date : new Date('2021-01-08'), price : 0},
+  {date : new Date('2021-01-09'), price : -170},
+  {date : new Date('2021-01-10'), price : 50},
+  {date : new Date('2021-01-11'), price : 100},
+  {date : new Date('2021-01-12'), price : 500},
+  {date : new Date('2021-01-13'), price : 500},
+  {date : new Date('2021-01-14'), price : 500},
 ]
 
 const FinancialChart : React.FC = () => {

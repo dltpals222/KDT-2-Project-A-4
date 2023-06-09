@@ -15,6 +15,9 @@ function Navi() : JSX.Element {
             <Link to="/luckpage">
             <button>운 페이지</button>
             </Link>
+            <Link to="/chart">
+            <button>차트 페이지</button>
+            </Link>
         </nav>
   );
 }

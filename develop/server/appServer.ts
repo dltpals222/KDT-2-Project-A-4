@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import path from "path";
-import { getUserInfo } from "./loginInfo";
+import { getUserInfo, setUserInfo } from "./loginInfo";
 
 // 익스프레스 앱서버 시작.
 const app = express();
@@ -25,6 +25,24 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.post("/login", (req: Request, res: Response) => {
+  const data = req.body;
+
+  const userInfo = getUserInfo();
+  const user = userInfo.find((u) => u.userid === data.id);
+  if (user) {
+    console.log("회원가입 실패! 일치하는 아이디 있음.");
+    res.json({ success: false, reason: "등록된 회원이 있습니다." });
+  } else {
+    console.log("회원가입 성공!");
+    // 새로운 회원 추가
+    userInfo.push({userid:data.id, userpwd:data.pwd});
+    // 회원 등록
+    setUserInfo(userInfo);
+    res.json({ success: true, userId: data.id });
+  }
+});
+
+app.post("/signup", (req: Request, res: Response) => {
   const data = req.body;
 
   const userInfo = getUserInfo();

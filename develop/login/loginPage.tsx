@@ -52,7 +52,7 @@ function LoginPage(): JSX.Element {
   return (
     <div style={container}>
       <div id="logo">운에 맡겨라! 모의투자</div>
-      <form method="POST" onSubmit={handleSubmit}>
+      <form method="POST" onSubmit={handleSubmit} style={container}>
         <label htmlFor="id">
           <input
             type="text"

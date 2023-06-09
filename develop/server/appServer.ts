@@ -63,7 +63,7 @@ app.post("/login", async (req: Request, res: Response) => {
     const query = `SELECT * FROM userinfo WHERE userid = '${data.id}'`;
     const result = await runQuery(connection, query);
 
-    if (result.length > 0) {
+    if (result.length === 0) {
       console.log("로그인 실패! 일치하는 아이디 없음.");
       res.json({ success: false, reason: "일치하는 아이디가 없습니다." });
     } else if (result[0].userid = data.id && result[0].userpwd === data.pwd) {

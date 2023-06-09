@@ -9,4 +9,5 @@ function LuckPage() : JSX.Element {
     </div>
   )
 }
+
 export default LuckPage;

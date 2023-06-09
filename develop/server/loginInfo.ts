@@ -18,6 +18,10 @@ export let globalState = {
         userid: "dgchoi3904",
         userpwd: "qwe123",
       },
+      {
+        userid: "qwe123",
+        userpwd: "qwd123"
+      }
     ],
   },
 };

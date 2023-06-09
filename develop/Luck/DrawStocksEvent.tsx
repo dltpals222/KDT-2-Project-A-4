@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 function DrawEvent() {
   const [inputs, setInputs] = useState<string[]>([]);
   const [outputs, setOutputs] = useState<string[]>([]);
+  const [randomIndex, setRandomIndex] = useState<number>(0);
 
   const handleCreate = (): void => {
     setInputs([...inputs, ""]);
@@ -28,6 +29,20 @@ function DrawEvent() {
     setOutputs(inputs);
   };
 
+  const handleRandomStocks = () => {
+    const randomStocks: number = Math.floor(Math.random() * outputs.length);
+    setRandomIndex(randomStocks);
+  };
+  interface stocksType{
+    stock : string[]
+  }
+  const PropsComponent: React.FC<stocksType> = ({ stock }) => {
+    return (
+      <div>
+        <div>{inputs.length}개의 종목 중 하나인 {stock.join(",")} 당첨!!!</div>
+      </div>
+    );
+  };
   return (
     <div>
       <h1>주식 종목 뽑기</h1>
@@ -50,11 +65,11 @@ function DrawEvent() {
       <button type="button" onClick={handleDelete}>
         종목 삭제
       </button>
-      <div>
+      <div >
       {outputs.map((output, index) => (
         <div key={index}>입력한 주식 종목: {output}</div>
       ))}
-        {inputs.length}개의 종목 중 하나인 {outputs.join(",")} 당첨!!!
+        <PropsComponent stock={handleRandomStocks[randomIndex]} />
       </div>
     </div>
   );

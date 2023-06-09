@@ -37,7 +37,7 @@ function SignUpPage() {
               if (result.success) {
                 console.log("회원가입 성공", result);
                 alert("회원가입에 성공하셨습니다.");
-                navigate("/login");
+                navigate("/");
               } else {
                 // 로그인 실패시 사유를 alert으로 출력.(내용은 reason에 담겨짐.)
                 console.log("회원가입 실패");
@@ -55,7 +55,7 @@ function SignUpPage() {
   return (
     <div style={container}>
       <div id="logo">회원가입</div>
-      <form method="POST" onSubmit={handleSubmit}>
+      <form method="POST" onSubmit={handleSubmit} style={container}>
         <label htmlFor="id">
           <input
             type="text"
@@ -92,9 +92,8 @@ function SignUpPage() {
             }
           />
         </label>
-        <button type="submit">로그인</button>
+        <button type="submit">회원가입</button>
       </form>
-      <button type="button">회원가입</button>
     </div>
   );
 }

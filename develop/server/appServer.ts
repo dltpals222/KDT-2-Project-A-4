@@ -24,7 +24,7 @@ app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "..", "..", "dist", "index.html"));
 });
 
-app.post("/login", (req: Request, res: Response) => {
+app.post("/signup", (req: Request, res: Response) => {
   const data = req.body;
 
   const userInfo = getUserInfo();
@@ -42,7 +42,7 @@ app.post("/login", (req: Request, res: Response) => {
   }
 });
 
-app.post("/signup", (req: Request, res: Response) => {
+app.post("/login", (req: Request, res: Response) => {
   const data = req.body;
 
   const userInfo = getUserInfo();

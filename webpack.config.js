@@ -1,7 +1,7 @@
 const path = require("path");
 
 const clientConfig = {
-    entry: path.resolve(__dirname, "develop", "testReact.tsx"),
+    entry: path.resolve(__dirname, "develop", "main.tsx"),
     mode: "development",
     module: {
         rules: [

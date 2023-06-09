@@ -46,7 +46,7 @@ const pool = mariadb.createPool(connectionConfig);
  * 
  * @returns {Promise<mariadb.PoolConnection>}
  */
-async function connectToMariaDB(): Promise<mariadb.PoolConnection> {
+export async function connectToMariaDB(): Promise<mariadb.PoolConnection> {
   try {
     const connection = await pool.getConnection();
     console.log('MariaDB에 성공적으로 연결되었습니다.');
@@ -70,7 +70,7 @@ async function connectToMariaDB(): Promise<mariadb.PoolConnection> {
  * @param query `String`타입 보낼 쿼리문.
  * @returns 
  */
-async function runQuery(connection: mariadb.PoolConnection, query: string): Promise<any> {
+export async function runQuery(connection: mariadb.PoolConnection, query: string): Promise<any> {
   try {
     const result = await connection.query(query);
     return result;
@@ -81,5 +81,3 @@ async function runQuery(connection: mariadb.PoolConnection, query: string): Prom
     connection.release(); // 연결 반환
   }
 }
-
-export default {connectToMariaDB, runQuery};

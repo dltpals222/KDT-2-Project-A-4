@@ -36,7 +36,7 @@ function LoginPage(): JSX.Element {
         if (result.success) {
           console.log("로그인 성공", result);
           alert("로그인 성공하셨습니다.")
-          //   navigate("/main");
+          navigate("/main");
         } else {
           // 로그인 실패시 사유를 alert으로 출력.(내용은 reason에 담겨짐.)
           console.log("로그인 실패");

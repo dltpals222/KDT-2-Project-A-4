@@ -35,7 +35,7 @@ function LoginPage(): JSX.Element {
       .then((result) => {
         if (result.success) {
           console.log("로그인 성공", result);
-          alert("로그인 성공하셨습니다.")
+          alert("로그인 성공하셨습니다.");
           navigate("/main");
         } else {
           // 로그인 실패시 사유를 alert으로 출력.(내용은 reason에 담겨짐.)
@@ -50,7 +50,7 @@ function LoginPage(): JSX.Element {
   }
 
   return (
-    <div>
+    <div style={container}>
       <div id="logo">운에 맡겨라! 모의투자</div>
       <form method="POST" onSubmit={handleSubmit}>
         <label htmlFor="id">
@@ -63,7 +63,6 @@ function LoginPage(): JSX.Element {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setId(e.target.value)
             }
-            style={container}
           />
         </label>
         <label htmlFor="password">
@@ -76,12 +75,11 @@ function LoginPage(): JSX.Element {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPwd(e.target.value)
             }
-            style={container}
           />
         </label>
         <button type="submit">로그인</button>
       </form>
-      <button type="button">회원가입</button>
+      <button type="button" onClick={() => {navigate("/signup")}}>회원가입</button>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import mariadb from 'mariadb';
 
 // MariaDB 연결 설정
 const connectionConfig : mariadb.PoolConfig = {
-  host: 'localhost', // MariaDB 호스트
+  host: '192.168.100.137', // MariaDB 호스트
   port: 3306, // MariaDB 포트
   user: 'root', // MariaDB 사용자 이름
   password: 'qwe123', // MariaDB 비밀번호

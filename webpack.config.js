@@ -5,17 +5,17 @@ const clientConfig = {
     mode: "development",
     module: {
         rules: [
-            //TS로더
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: "ts-loader",
-            },
             //바벨로더
             {
                 test: /\.(tsx?|js)$/,
                 exclude: /node_modules/,
                 use: "babel-loader"
+            },
+            //TS로더
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: "ts-loader",
             },
             {
                 test:/\.css$/,

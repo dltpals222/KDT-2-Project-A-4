@@ -50,6 +50,7 @@ function LuckPage() {
   if(luckIndex === -1 && luckMessageIndex === -1){
     return (
       <div>
+        <h1>오늘의 운세</h1>
         <button onClick={handleRandomLuck}>운세 돌리기</button>
       </div>
     )
@@ -57,11 +58,16 @@ function LuckPage() {
 
   return (
     <div>
+      <h1>오늘의 운세</h1>
       <PropsComponent
         luck={luckArr[luckIndex]}
         message={luckmessageArr[luckMessageIndex]}
       />
       <button onClick={handleRandomLuck}>운세 돌리기</button>
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

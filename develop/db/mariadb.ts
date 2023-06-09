@@ -4,7 +4,7 @@ import mariadb from 'mariadb';
 const connectionConfig : mariadb.PoolConfig = {
   host: '192.168.100.137', // MariaDB 호스트
   port: 3306, // MariaDB 포트
-  user: 'root', // MariaDB 사용자 이름
+  user: 'admin', // MariaDB 사용자 이름
   password: 'qwe123', // MariaDB 비밀번호
   database: "aitrading_db",// 사용할 데이터베이스 이름
   connectionLimit: 5

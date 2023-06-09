@@ -1,15 +1,44 @@
-import { type } from 'os'
 import samsung from '../sourceData/financeDB(samsung).json'
+import LG from '../sourceData/financeDB(LG).json'
+import hanhwa from '../sourceData/financeDB(hanhwa).json'
+import hyundai from '../sourceData/financeDB(hyundai).json'
+import NC from '../sourceData/financeDB(NC).json'
+import * as React from 'react'
 
 type CompanyDateType =  {
   day : (Date | string)[],
   volume : number[],
 }
 
-const samsungDate : CompanyDateType = {
-  day : samsung.samsung.map((value) => value.day),
-  volume : samsung.samsung.map((value) => value.volume)
+type CompanySamsungType = {
+  no : number,
+  open : number,
+  high : number,
+  low : number,
+  close : number,
+  volume : number,
+  day : string,
 }
 
+class companyDayVolume {
+  private company : {samsung : CompanySamsungType[]};
+  constructor(company : {samsung : CompanySamsungType[]}){
+    this.company = company
+  }
 
-console.log(samsungDate)
+  get dayVolume() : CompanyDateType {
+    return {
+      day : this.company.samsung.map((value) => value.day),
+      volume : this.company.samsung.map((value)=>value.volume)
+    }
+  }
+} 
+
+const samsungDate = new companyDayVolume(samsung).dayVolume
+const hanhwaDate = new companyDayVolume(hanhwa).dayVolume
+const hyundaiDate = new companyDayVolume(hyundai).dayVolume
+const NCDate = new companyDayVolume(NC).dayVolume
+const LGDate = new companyDayVolume(LG).dayVolume
+
+
+

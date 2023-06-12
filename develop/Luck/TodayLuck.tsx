@@ -4,7 +4,7 @@ interface PropsComponentType {
   luck: string;
   message: string;
 }
-
+//메세지를 띄우는 부분 프로퍼티s
 const PropsComponent: React.FC<PropsComponentType> = ({ luck, message }) => {
   return (
     <div>
@@ -38,15 +38,18 @@ function LuckPage() {
     "당신의 차에 펑크가 나고 컴퓨터 그래픽카드가 고장날 운세이니 체념 하십시오.",
     "길가다가도 머리가 빠질 운세이니 없는 듯이 사십시오.",
   ];
-
+  //데이터를 잠깐 저장하는 useState 
   const [luckIndex, setLuckIndex] = useState<number>(-1);
   const [luckMessageIndex, setLuckMessageIndex] = useState<number>(-1);
 
+  //luckArr, luckmessageArr 배열에 있는 값을 랜덤으로 돌리는 로직
   const handleRandomLuck = () => {
     const randomLuck: number = Math.floor(Math.random() * luckArr.length);
     setLuckIndex(randomLuck);
     setLuckMessageIndex(randomLuck);
   };
+  //처음에 제출 방지하는 로직 
+  /* 매개변수event 선언하고 event.preventDefault 사용하면 더 간단함 */
   if(luckIndex === -1 && luckMessageIndex === -1){
     return (
       <div>

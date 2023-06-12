@@ -1,34 +1,37 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 
+ //데이터를 잠깐 저장하는 useState 
 function DrawEvent() {
   const [inputs, setInputs] = useState<string[]>([]);
   const [outputs, setOutputs] = useState<string[]>([]);
   const [randomIndex, setRandomIndex] = useState<number>(0);
 
+  //input을 생성 하기 위한 로직
   const handleCreate = (): void => {
     setInputs([...inputs, ""]);
   };
-
+  //사용자가 입력한 값을 모두 inputs에 저장
   const handleInputEventChange = (index: number, event: ChangeEvent<HTMLInputElement>): void => {
     const newInputs = [...inputs];
     newInputs[index] = event.target.value;
     setInputs(newInputs);
   };
-
+  //input을 삭제 하기 위한 로직 
   const handleDelete = (): void => {
     if (inputs.length === 0) {
       return;
     }
     const updatedInputs: string[] = [...inputs];
+    //마지막 배열값 제거 
     updatedInputs.pop();
     setInputs(updatedInputs);
   };
-
+  //사용자 입력값을 setOutputs에 데이터 저장
   const handleConfirm = (event: FormEvent): void => {
     event.preventDefault(); // 기본 폼 제출 동작 방지
     setOutputs(inputs);
   };
-
+  //사용자 입력 값을 랜덤으로 하나 뽑기 위한 로직 (미완성)
   const handleRandomStocks = () => {
     const randomStocks: number = Math.floor(Math.random() * outputs.length);
     setRandomIndex(randomStocks);
@@ -36,6 +39,7 @@ function DrawEvent() {
   interface stocksType{
     stock : string[]
   }
+  //랜덤으로 뽑은 입력값을 출력하기위한 프로퍼티
   const PropsComponent: React.FC<stocksType> = ({ stock }) => {
     return (
       <div>
@@ -43,6 +47,7 @@ function DrawEvent() {
       </div>
     );
   };
+  
   return (
     <div>
       <h1>주식 종목 뽑기</h1>

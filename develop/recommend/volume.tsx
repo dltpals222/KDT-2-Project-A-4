@@ -39,7 +39,7 @@ class CompanyDayVolumeInfo {
   }
 
   /**
-   * 배열을 전부 받아와서 내가 원하는 데이터(날짜, 거래량)를 가져옴
+   * 데이터(날짜, 거래량)를 가져옴
    */
   get dayVolume() : CompanyDateType {
     return {

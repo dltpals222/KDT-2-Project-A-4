@@ -5,12 +5,20 @@ import hyundai from '../sourceData/financeDB(hyundai).json'
 import NC from '../sourceData/financeDB(NC).json'
 import * as React from 'react'
 
+/**
+ * 회사 데이터타입
+ * day : Date, string 배열 날짜
+ * volume : number 배열 거래량
+ */
 type CompanyDateType =  {
-  day : (Date | string)[],
+  day : string[],
   volume : number[],
 }
 
-type CompanySamsungType = {
+/**
+ * 주식 거래 데이터 타입
+ */
+type CompanyInfoType = {
   no : number,
   open : number,
   high : number,
@@ -20,12 +28,19 @@ type CompanySamsungType = {
   day : string,
 }
 
-class companyDayVolume {
-  private company : {samsung : CompanySamsungType[]};
-  constructor(company : {samsung : CompanySamsungType[]}){
+/**
+ * 주식 데이터를 받아올 때 날짜와 거래량을 따로 배열로 저장
+ * 날짜는 string[], 거래량은 number[]로 받아옴
+ */
+class CompanyDayVolumeInfo {
+  private company : {samsung : CompanyInfoType[]};
+  constructor(company : {samsung : CompanyInfoType[]}){
     this.company = company
   }
 
+  /**
+   * 배열을 전부 받아와서 내가 원하는 데이터(날짜, 거래량)를 가져옴
+   */
   get dayVolume() : CompanyDateType {
     return {
       day : this.company.samsung.map((value) => {
@@ -40,12 +55,9 @@ class companyDayVolume {
   }
 } 
 
-const samsungDate = new companyDayVolume(samsung).dayVolume
-const hanhwaDate = new companyDayVolume(hanhwa).dayVolume
-const hyundaiDate = new companyDayVolume(hyundai).dayVolume
-const NCDate = new companyDayVolume(NC).dayVolume
-const LGDate = new companyDayVolume(LG).dayVolume
-
-
-// console.log(new Date(samsung.samsung[0].day))
-console.log(samsungDate.day[0])
+//거래량 기준 2일전의 종가와 1일전의 종가를 뺀 양 중 큰 거래량 TOP 5를 추천
+const samsungDate = new CompanyDayVolumeInfo(samsung).dayVolume
+const hanhwaDate = new CompanyDayVolumeInfo(hanhwa).dayVolume
+const hyundaiDate = new CompanyDayVolumeInfo(hyundai).dayVolume
+const NCDate = new CompanyDayVolumeInfo(NC).dayVolume
+const LGDate = new CompanyDayVolumeInfo(LG).dayVolume

@@ -1,14 +1,12 @@
 import * as React from "react";
 import { useState, ChangeEvent, FormEvent } from "react";
 
+//검색결과
 interface SearchResult {
   name: string;
 }
 
-// function performSearch(searchTerm: string, searchCategory: string): SearchResult[] {
-//   return [searchTerm, searchCategory];
-// }
-
+//검색 로직 작성 중
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchCategory, setSearchCategory] = useState<string>("name");

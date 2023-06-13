@@ -1,6 +1,7 @@
 import * as React from "react";
 import {} from "react";
 import { useState, ChangeEvent, FormEvent } from "react";
+import companyNameCode from "../Model/companyNameCode";
 
 //검색결과
 interface SearchResult {
@@ -25,6 +26,8 @@ const SearchPage = () => {
     event.preventDefault();
   };
 
+  const nameValue = companyNameCode("name","삼성")
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -35,7 +38,7 @@ const SearchPage = () => {
         <input type="text" value={searchTerm} onChange={handleInputChange} />
         <input type="submit" value="확인" />
       </form>
-      <ul></ul>
+      <ul>{nameValue}</ul>
     </div>
   );
 };

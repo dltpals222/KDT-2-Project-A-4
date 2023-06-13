@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import path from "path";
-import { getUserInfo, setUserInfo } from "./loginInfo"; // 사용하지 않는 구문 표시
 import { connectToMariaDB, runQuery } from "./mariadb";
 import { PoolConnection } from "mariadb";
 

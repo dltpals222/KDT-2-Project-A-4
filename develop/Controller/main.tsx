@@ -6,6 +6,7 @@ import LoginPage from "../ViewModel/loginPage";
 import LuckPage from "../View/LuckPage";
 import SearchPage from "../ViewModel/searchPage";
 import MainPage from "../View/MainPage";
+import MainComp from "../View/MainComp";
 import SignUpPage from "../ViewModel/signUpPage";
 // TS에서는 React.ReactNode를 배정하면 이해하지 못한다. 그렇기에 공식 홈페이지에서 이를 해석하기 위해 JSX 타입을 사용한다.
 // JSX 타입의 경우 함수 형식(JSX.Element)과 클래스 형식(JSX.ElementClass)으로 나뉜다.
@@ -17,7 +18,6 @@ function App(): FCReactNode {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Test />} /> */}
           <Route path="/" element={<LoginPage />} />
           <Route path="/main" element={<MainPage />} />
           <Route path="/luckpage" element={<LuckPage />} />

@@ -4,7 +4,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 function DrawEvent() {
   const [inputs, setInputs] = useState<string[]>([]);
   const [outputs, setOutputs] = useState<string[]>([]);
-  const [randomIndex, setRandomIndex] = useState<number>(0);
+  // const [randomIndex, setRandomIndex] = useState<string[]>([]);
 
   //input을 생성 하기 위한 로직
   const handleCreate = (): void => {
@@ -32,9 +32,10 @@ function DrawEvent() {
     setOutputs(inputs);
   };
   //사용자 입력 값을 랜덤으로 하나 뽑기 위한 로직 (미완성)
-  const handleRandomStocks = () => {
-    const randomStocks: number = Math.floor(Math.random() * outputs.length);
-    setRandomIndex(randomStocks);
+  const handleRandomStocks  = ()=> {
+    const randomStocksIndex : number = Math.floor(Math.random() * outputs.length);
+    const randomStocks = outputs[randomStocksIndex]
+    return [randomStocks];
   };
   interface stocksType{
     stock : string[]
@@ -43,7 +44,7 @@ function DrawEvent() {
   const PropsComponent: React.FC<stocksType> = ({ stock }) => {
     return (
       <div>
-        <div>{inputs.length}개의 종목 중 하나인 {stock.join(",")} 당첨!!!</div>
+        <div>{inputs.length}개의 종목 중 하나인 {stock} 당첨!!!</div>
       </div>
     );
   };
@@ -74,7 +75,7 @@ function DrawEvent() {
       {outputs.map((output, index) => (
         <div key={index}>입력한 주식 종목: {output}</div>
       ))}
-        {/* <PropsComponent stock={handleRandomStocks[randomIndex]} /> */}
+        <PropsComponent stock={handleRandomStocks()} />
       </div>
     </div>
   );

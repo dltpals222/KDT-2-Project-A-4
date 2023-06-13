@@ -1,8 +1,4 @@
-import samsung from '../sourceData/financeDB(samsung).json'
-import LG from '../sourceData/financeDB(LG).json'
-import hanhwa from '../sourceData/financeDB(hanhwa).json'
-import hyundai from '../sourceData/financeDB(hyundai).json'
-import NC from '../sourceData/financeDB(NC).json'
+
 import * as React from 'react'
 
 /**
@@ -56,8 +52,4 @@ class CompanyDayVolumeInfo {
 } 
 
 //거래량 기준 2일전의 종가와 1일전의 종가를 뺀 양 중 큰 거래량 TOP 5를 추천
-const samsungDate = new CompanyDayVolumeInfo(samsung).dayVolume
-const hanhwaDate = new CompanyDayVolumeInfo(hanhwa).dayVolume
-const hyundaiDate = new CompanyDayVolumeInfo(hyundai).dayVolume
-const NCDate = new CompanyDayVolumeInfo(NC).dayVolume
-const LGDate = new CompanyDayVolumeInfo(LG).dayVolume
+

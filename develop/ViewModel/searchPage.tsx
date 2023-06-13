@@ -2,15 +2,15 @@ import * as React from "react";
 import { useState, ChangeEvent, FormEvent } from "react";
 
 //검색결과
-interface SearchResult {
-  name: string;
-}
+// interface SearchResult {
+//   name: string;
+// }
 
 //검색 로직 작성 중
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchCategory, setSearchCategory] = useState<string>("name");
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  // const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(event.target.value);
@@ -20,10 +20,14 @@ const SearchPage = () => {
     setSearchCategory(event.target.value);
   };
 
+  function searchForm (searchCategory : string, searchTerm : string){
+
+  }
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    // const results = performSearch(searchTerm, searchCategory);
-    // setSearchResults(results);
+    // setSearchTerm(searchTerm);
+    // setSearchCategory(searchCategory);
   };
 
   console.log('검색어',searchTerm,setSearchTerm)

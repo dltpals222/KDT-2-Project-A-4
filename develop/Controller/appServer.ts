@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import path from "path";
 import { getUserInfo, setUserInfo } from "./loginInfo";
-import { connectToMariaDB, runQuery } from "../db/mariadb";
+import { connectToMariaDB, runQuery } from "./mariadb";
 import { PoolConnection } from "mariadb";
 
 // 익스프레스 앱서버 시작.

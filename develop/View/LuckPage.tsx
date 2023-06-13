@@ -1,6 +1,6 @@
 import * as React from "react";
-import TodayLuck from "./TodayLuck"
-import DrawStocksEvent from "./DrawStocksEvent"
+import TodayLuck from "../ViewModel/TodayLuck"
+import DrawStocksEvent from "../ViewModel/DrawStocksEvent"
 
 
 function LuckPage() : JSX.Element {

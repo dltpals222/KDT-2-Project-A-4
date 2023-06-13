@@ -25,13 +25,13 @@ const SearchPage = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>)=> {
     event.preventDefault();
 
-  }
+  runQuery(connectToMariaDB, )
 
-
-
-
-  console.log('검색어',searchTerm,setSearchTerm)
-  console.log('검색카테괼',searchCategory,setSearchCategory)
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    // setSearchTerm(searchTerm);
+    // setSearchCategory(searchCategory);
+  };
 
   return (
     <div>

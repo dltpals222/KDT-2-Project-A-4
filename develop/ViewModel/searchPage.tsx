@@ -1,16 +1,17 @@
 import * as React from "react";
 import { useState, ChangeEvent, FormEvent } from "react";
+import {connectToMariaDB, runQuery} from "../Controller/mariadb"
 
 //검색결과
-// interface SearchResult {
-//   name: string;
-// }
+interface SearchResult {
+  name?: string|number;
+  code?: string;
+}
 
 //검색 로직 작성 중
 const SearchPage = () => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string|number>("");
   const [searchCategory, setSearchCategory] = useState<string>("name");
-  // const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(event.target.value);
@@ -20,18 +21,14 @@ const SearchPage = () => {
     setSearchCategory(event.target.value);
   };
 
-  function searchForm (searchCategory : string, searchTerm : string){
+  const companyNameQuery : string = 'select no, code, name from companylist;'
 
-  }
+  runQuery(connectToMariaDB, )
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    // setSearchTerm(searchTerm);
-    // setSearchCategory(searchCategory);
+    console.log('submit',event)
   };
-
-  console.log('검색어',searchTerm,setSearchTerm)
-  console.log('검색카테괼',searchCategory,setSearchCategory)
 
   return (
     <div>

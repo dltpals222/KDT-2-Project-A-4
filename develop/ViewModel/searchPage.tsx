@@ -25,7 +25,9 @@ const SearchPage = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>)=> {
     event.preventDefault();
 
-  runQuery(connectToMariaDB, )
+  }
+
+
 
 
 

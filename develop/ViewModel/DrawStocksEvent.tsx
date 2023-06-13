@@ -43,7 +43,7 @@ function DrawEvent() {
   const PropsComponent: React.FC<stocksType> = ({ stock }) => {
     return (
       <div>
-        <div>{inputs.length > 0 &&`${inputs.length}개의 종목 중 하나인 ${stock} 당첨!!!`}</div>
+        <div>{`${stock}`.length > 0 &&`${inputs.length}개의 종목 중 하나인 ${stock} 당첨!!!`}</div>
       </div>
     );
   };
@@ -51,6 +51,8 @@ function DrawEvent() {
   return (
     <div>
       <h1>주식 종목 뽑기</h1>
+      <div>종목생성을 누르고 뽑을 주식 종목을 써주세요.</div>
+      <br/>
       <form onSubmit={handleConfirm}>
         {inputs.map((input, index) => (
           <div key={index}>
@@ -68,16 +70,16 @@ function DrawEvent() {
       <button type="button" onClick={handleDelete}>
         종목 삭제
       </button>
-        {/* <button type="submit">확인</button> */}
+        <button type="submit">종목 뽑기</button>
       </form>
-      <form onSubmit={handleConfirm} >
+      <div>
       {outputs.map((output, index) => (
         <div key={index}>입력한 주식 종목: {output}</div>
       ))}
         <PropsComponent stock={handleRandomStocks()} />
-        <button type="submit">확인</button>
+        {/* <button type="submit">확인</button> */}
 
-      </form>
+      </div>
     </div>
   );
 }

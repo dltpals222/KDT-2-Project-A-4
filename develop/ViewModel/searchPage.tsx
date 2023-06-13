@@ -30,6 +30,9 @@ const SearchPage = () => {
 
 
 
+  console.log('검색어',searchTerm,setSearchTerm)
+  console.log('검색카테괼',searchCategory,setSearchCategory)
+
   return (
     <div>
       <form onSubmit={handleSubmit} method="GET">

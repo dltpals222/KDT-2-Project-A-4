@@ -1,7 +1,7 @@
 const path = require("path");
 
 const clientConfig = {
-    entry: path.resolve(__dirname, "develop", "main.tsx"),
+    entry: path.resolve(__dirname, "develop", "Controller","main.tsx"),
     mode: "development",
     module: {
         rules: [
@@ -33,7 +33,7 @@ const clientConfig = {
     },
 };
 const serverConfig = {
-    entry: path.resolve(__dirname, "develop", "server", "appServer.ts"),
+    entry: path.resolve(__dirname, "develop", "Controller", "appServer.ts"),
     mode: "development",
     module: {
         rules: [

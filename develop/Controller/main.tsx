@@ -2,7 +2,6 @@ import * as React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // 하위 컴포넌트들.
-import Test from "./Test";
 import LoginPage from "../ViewModel/loginPage";
 import LuckPage from "../View/LuckPage";
 import SearchPage from "../ViewModel/searchPage";

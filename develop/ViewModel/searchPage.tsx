@@ -1,6 +1,6 @@
 import * as React from "react";
+import {} from "react";
 import { useState, ChangeEvent, FormEvent } from "react";
-import {connectToMariaDB, runQuery} from "../Controller/mariadb"
 
 //검색결과
 interface SearchResult {
@@ -21,13 +21,8 @@ const SearchPage = () => {
     setSearchCategory(event.target.value);
   };
 
-  const companyNameQuery : string = 'select no, code, name from companylist;'
-
-  runQuery(connectToMariaDB, )
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log('submit',event)
   };
 
   return (

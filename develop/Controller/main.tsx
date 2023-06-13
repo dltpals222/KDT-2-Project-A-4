@@ -19,10 +19,12 @@ function App(): FCReactNode {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/main" element={<MainPage />} />
-          <Route path="/luckpage" element={<LuckPage />} />
-          <Route path="/search" element={<SearchPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/main" element={<MainPage />}>
+            <Route path="" element={<MainComp />} />
+            <Route path="luckpage" element={<LuckPage />} />
+            <Route path="search" element={<SearchPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

@@ -13,6 +13,7 @@ function LoginPage(): JSX.Element {
     alignItems: "center",
     height: "80%",
   };
+  // 목표 : 코드내 레거시 코드, 주석, 변수명 수정하기.
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     // 기본 제출 이벤트 방지
     e.preventDefault();

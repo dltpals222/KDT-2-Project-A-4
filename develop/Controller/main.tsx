@@ -24,6 +24,7 @@ function App(): FCReactNode {
           <Route path="/luckpage" element={<LuckPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/chart" element={<FinancialChart />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

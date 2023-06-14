@@ -5,8 +5,9 @@ import companyNameCode from "../Model/companyNameCode";
 
 //검색결과
 interface SearchResult {
-  name?: string|number;
-  code?: string;
+  no : number;
+  name : string;
+  code : string;
 }
 
 //검색 로직 작성 중
@@ -26,7 +27,17 @@ const SearchPage = () => {
     event.preventDefault();
   };
 
-  const nameValue = companyNameCode("name","삼성")
+  const companyDateToString = (value: SearchResult) : string  => {
+    const companyName = React.createElement('div')
+    const companyCode = React.createElement('div')
+    
+    return ``
+  }
+
+  const companySearchList : [] = []
+  companyNameCode(searchCategory,searchTerm).then(value => {
+    companySearchList.push()
+  })
 
   return (
     <div>
@@ -38,7 +49,9 @@ const SearchPage = () => {
         <input type="text" value={searchTerm} onChange={handleInputChange} />
         <input type="submit" value="확인" />
       </form>
-      <ul>{nameValue}</ul>
+      <ul>
+        "<li>리스트</li>"
+      </ul>
     </div>
   );
 };

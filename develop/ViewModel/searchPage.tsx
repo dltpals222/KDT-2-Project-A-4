@@ -35,7 +35,6 @@ const SearchPage = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} method="GET">
-      <form onSubmit={handleSubmit} method="GET">
         <select onChange={handleCategoryChange} value={searchCategory}>
           <option value="name">회사명</option>
           <option value="code">회사코드</option>

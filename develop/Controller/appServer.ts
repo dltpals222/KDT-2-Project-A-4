@@ -7,6 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 // 익스프레스 앱서버 시작.
 const app = express();
 
+// 세션 값 저장용 객체.(함수안에 키 : 값 형태로 추가될 예정.)
+interface Sessions {
+  [sessionId: string] : any
+}
+const sessions : Sessions = {};
+
 // 사용할 정적 파일 폴더 경로 설정. 현재 develop으로 설정되어 있는것으로 보임.
 app.use(
   express.static(path.join(__dirname, "..", "..", "dist"), {
@@ -27,11 +33,11 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.post("/signup", async (req: Request, res: Response) => {
-  const data = req.body;
+  const signUpData = req.body;
   let connection : PoolConnection | undefined;
   try {
     connection = await connectToMariaDB();
-    const query = `SELECT * FROM userinfo WHERE userid = '${data.id}'`;
+    const query = `SELECT * FROM userinfo WHERE userid = '${signUpData.id}'`;
     const result = await runQuery(connection, query);
 
     if (result.length > 0) {
@@ -39,9 +45,9 @@ app.post("/signup", async (req: Request, res: Response) => {
       res.json({ success: false, reason: "등록된 회원이 있습니다." });
     } else {
       console.log("회원가입 성공!");
-      const insertQuery = `INSERT INTO userinfo (userid, userpwd) VALUES ('${data.id}', '${data.pwd}')`;
+      const insertQuery = `INSERT INTO userinfo (userid, userpwd) VALUES ('${signUpData.id}', '${signUpData.pwd}')`;
       await runQuery(connection, insertQuery);
-      res.json({ success: true, userId: data.id });
+      res.json({ success: true });
     }
   } catch (error) {
     console.error("오류:", error);
@@ -54,21 +60,27 @@ app.post("/signup", async (req: Request, res: Response) => {
 });
 
 app.post("/login", async (req: Request, res: Response) => {
-  const data = req.body;
+  const loginData = req.body;
 
   let connection : PoolConnection | undefined;
   
   try{
     connection = await connectToMariaDB();
-    const query = `SELECT * FROM userinfo WHERE userid = '${data.id}'`;
+    const query = `SELECT * FROM userinfo WHERE userid = '${loginData.id}'`;
     const result = await runQuery(connection, query);
 
     if (result.length === 0) {
       console.log("로그인 실패! 일치하는 아이디 없음.");
       res.json({ success: false, reason: "일치하는 아이디가 없습니다." });
-    } else if (result[0].userid = data.id && result[0].userpwd === data.pwd) {
+    } else if (result[0].userid = loginData.id && result[0].userpwd === loginData.pwd) {
       console.log("로그인 성공!");
-      res.json({ success: true, userId: data.id });
+      // 세션 키 생성
+      let sessionId: string = uuidv4();
+      // 서버 세션에 id포함 저장.
+      sessions[sessionId] = { userid: loginData.id }
+      // 세션 쿠키 전송.
+      res.cookie("sessionId", sessionId);
+      res.json({ success: true , sessionId : sessionId });
     } else {
       console.log("로그인 실패!");
       res.json({ success: false, reason: "암호가 일치하지 않습니다." });

@@ -30,8 +30,6 @@ const SearchPage = () => {
 
 
 
-
-
   return (
     <div>
       <form onSubmit={handleSubmit} method="GET">

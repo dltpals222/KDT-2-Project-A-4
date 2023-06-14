@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 let connection : PoolConnection | undefined;
 
-async function companyNameCode(searchCategory : string, searchTerm : string | number):Promise<ReactNode> {
+async function companyNameCode(searchCategory : string, searchTerm : string | number) {
   try {
     connection = await connectToMariaDB();
     let query : string ;
@@ -13,10 +13,9 @@ async function companyNameCode(searchCategory : string, searchTerm : string | nu
     } else {
       query = `select no, code, name from companylist where code like '%${searchTerm}%'`
     }
-    const result : Promise<ReactNode>= await runQuery(connection, query);
-    const resultPromise : ReactNode = await result
+    const result = await runQuery(connection, query);
     console.log("쿼리문 실행 결과",result); // 쿼리 실행 결과를 출력하거나 필요한 작업을 수행합니다.
-    return resultPromise
+    // return resultPromise
   } catch (error) {
     console.error('오류:', error);
   } finally {

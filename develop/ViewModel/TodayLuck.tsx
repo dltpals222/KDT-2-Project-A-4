@@ -46,10 +46,11 @@ function LuckPage() {
   useEffect(()=>{
     const saveDate = localStorage.getItem("clickedButtonDate");
     const currentDate = new Date().toLocaleDateString();
-    
+
     //밑에 주석은 버튼을 한번 누르면 버튼이 비활성화 되므로 날짜를 바꿔줘야해서 남겨둠
     // const currentDate = "2023-06-11";
 
+    //버튼을 누를경우 저장된 날짜와 현재 날짜가 같으면 실행
     if(saveDate === currentDate){
       const savedClickButton = localStorage.getItem("isButtonClicked")
       if(savedClickButton === "true"){

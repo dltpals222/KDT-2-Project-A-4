@@ -1,6 +1,5 @@
 import { PoolConnection } from 'mariadb'
 import {connectToMariaDB,runQuery} from '../Controller/mariadb'
-import { ReactNode } from 'react';
 
 let connection : PoolConnection | undefined;
 
@@ -14,8 +13,8 @@ async function companyNameCode(searchCategory : string, searchTerm : string | nu
       query = `select no, code, name from companylist where code like '%${searchTerm}%'`
     }
     const result = await runQuery(connection, query);
-    console.log("쿼리문 실행 결과",result); // 쿼리 실행 결과를 출력하거나 필요한 작업을 수행합니다.
-    // return resultPromise
+    console.log("쿼리문 실행 결과",result);
+    return result;
   } catch (error) {
     console.error('오류:', error);
   } finally {

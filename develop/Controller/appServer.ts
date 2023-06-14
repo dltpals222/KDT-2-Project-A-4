@@ -29,7 +29,7 @@ app.use(express.json());
 
 // 기본 도메인주소 요청 수신시 시작 Html 파일 전송.(HTML안에 번들 파일 연결 예정)
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'dist', "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.post("/signup", async (req: Request, res: Response) => {

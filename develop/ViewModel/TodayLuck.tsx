@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 interface PropsComponentType {
   luck: string;
@@ -41,12 +41,35 @@ function LuckPage() {
   //데이터를 잠깐 저장하는 useState 
   const [luckIndex, setLuckIndex] = useState<number>(-1);
   const [luckMessageIndex, setLuckMessageIndex] = useState<number>(-1);
+  const [isButtonDisabled, setButtonDisabled] = useState<boolean>(false)
+  
+  useEffect(()=>{
+    const saveDate = localStorage.getItem("clickedButtonDate");
+    const currentDate = new Date().toLocaleDateString();
+    
+    //밑에 주석은 버튼을 한번 누르면 버튼이 비활성화 되므로 날짜를 바꿔줘야해서 남겨둠
+    // const currentDate = "2023-06-11";
 
+    if(saveDate === currentDate){
+      const savedClickButton = localStorage.getItem("isButtonClicked")
+      if(savedClickButton === "true"){
+        setButtonDisabled(true)
+      }
+    }else{
+      localStorage.setItem("clickedButtonDate",currentDate)
+      localStorage.setItem("isButtonClicked","false")
+      setButtonDisabled(false)
+    }
+  },[])
   //luckArr, luckmessageArr 배열에 있는 값을 랜덤으로 돌리는 로직
   const handleRandomLuck = () => {
+    if(!isButtonDisabled){
     const randomLuck: number = Math.floor(Math.random() * luckArr.length);
     setLuckIndex(randomLuck);
     setLuckMessageIndex(randomLuck);
+    setButtonDisabled(true)
+    localStorage.setItem("isButtonClicked","true")
+    }
   };
   //처음에 제출 방지하는 로직 
   /* 매개변수event 선언하고 event.preventDefault 사용하면 더 간단함 */
@@ -54,7 +77,7 @@ function LuckPage() {
     return (
       <div>
         <h1>오늘의 운세</h1>
-        <button onClick={handleRandomLuck}>운세 돌리기</button>
+      <button onClick={handleRandomLuck} disabled={isButtonDisabled}>운세 돌리기</button>
       </div>
     )
   }
@@ -66,7 +89,7 @@ function LuckPage() {
         luck={luckArr[luckIndex]}
         message={luckmessageArr[luckMessageIndex]}
       />
-      <button onClick={handleRandomLuck}>운세 돌리기</button>
+      <button onClick={handleRandomLuck} disabled={isButtonDisabled}>운세 돌리기</button>
       <br />
       <br />
       <br />

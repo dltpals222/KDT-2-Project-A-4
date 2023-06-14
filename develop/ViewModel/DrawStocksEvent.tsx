@@ -4,6 +4,9 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 function DrawEvent() {
   const [inputs, setInputs] = useState<string[]>([]);
   const [outputs, setOutputs] = useState<string[]>([]);
+  const [error, setError] = useState<string>("");
+  const [count, setCount] = useState<number>(0);
+  const [buttonDisabled, setButtonDisabled] = useState<string>("")
 
   //input을 생성 하기 위한 로직
   const handleCreate = (): void => {
@@ -29,6 +32,11 @@ function DrawEvent() {
   const handleConfirm = (event: FormEvent): void => {
     event.preventDefault(); // 기본 폼 제출 동작 방지
     setOutputs(inputs);
+        if(inputs.some(value=>value.trim()==="")){
+      setError("주식종목을 빈칸 없이 모두 입력해주세요.");
+    }else{
+      setError("");
+    }
   };
   //사용자 입력 값을 랜덤으로 하나 뽑기 위한 로직 (미완성)
   const handleRandomStocks  = ()=> {
@@ -36,6 +44,7 @@ function DrawEvent() {
     const randomStocks = outputs[randomStocksIndex]
     return [randomStocks];
   };
+
   interface stocksType{
     stock : string[]
   }
@@ -70,14 +79,14 @@ function DrawEvent() {
       <button type="button" onClick={handleDelete}>
         종목 삭제
       </button>
-        <button type="submit">종목 뽑기</button>
+        <button type="submit" >종목 뽑기</button>
       </form>
       <div>
       {outputs.map((output, index) => (
         <div key={index}>입력한 주식 종목: {output}</div>
       ))}
-        <PropsComponent stock={handleRandomStocks()} />
-        {/* <button type="submit">확인</button> */}
+        {!error && <PropsComponent stock={handleRandomStocks()} />}
+        {error && <h1>{error}</h1>}
 
       </div>
     </div>

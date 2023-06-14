@@ -15,7 +15,7 @@ const sessions : Sessions = {};
 
 // 사용할 정적 파일 폴더 경로 설정. 현재 develop으로 설정되어 있는것으로 보임.
 app.use(
-  express.static(path.join(__dirname), {
+  express.static(path.join(__dirname, "..", "..", "dist"), {
     // 각 파일 타입별 헤더 설정. js시 헤더 컨텐츠 타입을 JS로.
     setHeaders(res: Response, filePath: string) {
       if (filePath.endsWith(".js")) {

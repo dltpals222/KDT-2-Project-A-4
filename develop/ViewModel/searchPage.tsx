@@ -1,7 +1,5 @@
 import * as React from "react";
-import {} from "react";
-import { useState, ChangeEvent, FormEvent } from "react";
-import companyNameCode from "../Model/companyNameCode";
+import { useState, ChangeEvent, FormEvent, SetStateAction } from "react";
 
 //검색결과
 interface SearchResult {
@@ -27,28 +25,14 @@ const SearchPage = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>)=> {
     event.preventDefault();
 
-  runQuery(connectToMariaDB, )
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    // setSearchTerm(searchTerm);
-    // setSearchCategory(searchCategory);
-  };
-
-  const companyDateToString = (value: SearchResult) : string  => {
-    const companyName = React.createElement('div')
-    const companyCode = React.createElement('div')
-    
-    return ``
   }
 
-  const companySearchList : [] = []
-  companyNameCode(searchCategory,searchTerm).then(value => {
-    companySearchList.push()
-  })
+
+
 
   return (
     <div>
+      <form onSubmit={handleSubmit} method="GET">
       <form onSubmit={handleSubmit} method="GET">
         <select onChange={handleCategoryChange} value={searchCategory}>
           <option value="name">회사명</option>
@@ -58,7 +42,7 @@ const SearchPage = () => {
         <input type="submit" value="확인" />
       </form>
       <ul>
-        "<li>리스트</li>"
+        
       </ul>
     </div>
   );

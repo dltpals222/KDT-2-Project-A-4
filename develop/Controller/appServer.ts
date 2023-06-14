@@ -1,14 +1,15 @@
 import express, { Request, Response } from "express";
 import path from "path";
 import { connectToMariaDB, runQuery } from "./mariadb";
-import { Pool, PoolConnection } from "mariadb";
+import { PoolConnection } from "mariadb";
+import { v4 as uuidv4 } from 'uuid';
 
 // 익스프레스 앱서버 시작.
 const app = express();
 
 // 사용할 정적 파일 폴더 경로 설정. 현재 develop으로 설정되어 있는것으로 보임.
 app.use(
-  express.static(path.join(__dirname), {
+  express.static(path.join(__dirname, "..", "..", "dist"), {
     // 각 파일 타입별 헤더 설정. js시 헤더 컨텐츠 타입을 JS로.
     setHeaders(res: Response, filePath: string) {
       if (filePath.endsWith(".js")) {
@@ -22,7 +23,7 @@ app.use(express.json());
 
 // 기본 도메인주소 요청 수신시 시작 Html 파일 전송.(HTML안에 번들 파일 연결 예정)
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "..", "..", "dist", "index.html"));
 });
 
 app.get("/api/main/search", async (req:Request, res:Response) => {

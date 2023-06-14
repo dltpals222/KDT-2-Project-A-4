@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 
  //데이터를 잠깐 저장하는 useState 
 function DrawEvent() {
@@ -6,8 +6,25 @@ function DrawEvent() {
   const [outputs, setOutputs] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
   const [count, setCount] = useState<number>(0);
-  const [buttonDisabled, setButtonDisabled] = useState<string>("")
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false)
 
+//클릭시 5번의 횟수 제한 + 버튼 잠금 만들어야함 
+  useEffect(()=>{
+    const saveDate = localStorage.getItem("clickedButtonDate");
+    const currentDate = new Date().toLocaleDateString();
+    
+    if(saveDate === currentDate){
+      const savedClickButton = localStorage.getItem("isButtonClicked")
+      if(savedClickButton === "true"){
+        setButtonDisabled(true)
+      }
+    }else{
+      localStorage.setItem("clickedButtonDate",currentDate)
+      localStorage.setItem("isButtonClicked","false")
+      setButtonDisabled(false)
+    }
+  },[])
+  
   //input을 생성 하기 위한 로직
   const handleCreate = (): void => {
     setInputs([...inputs, ""]);
@@ -86,7 +103,7 @@ function DrawEvent() {
         <div key={index}>입력한 주식 종목: {output}</div>
       ))}
         {!error && <PropsComponent stock={handleRandomStocks()} />}
-        {error && <h1>{error}</h1>}
+        {error && <h1 style={{color : "red"}}>{error}</h1>}
 
       </div>
     </div>

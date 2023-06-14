@@ -1,7 +1,5 @@
 import * as React from "react";
-import {} from "react";
-import { useState, ChangeEvent, FormEvent } from "react";
-import companyNameCode from "../Model/companyNameCode";
+import { useState, ChangeEvent, FormEvent, SetStateAction } from "react";
 
 //검색결과
 interface SearchResult {
@@ -14,6 +12,7 @@ interface SearchResult {
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState<string|number>("");
   const [searchCategory, setSearchCategory] = useState<string>("name");
+  const [companyDateToString,setCompanyDateToString ] = useState<Promise<any>>()
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(event.target.value);
@@ -23,25 +22,17 @@ const SearchPage = () => {
     setSearchCategory(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>)=> {
     event.preventDefault();
-  };
 
-  const companyDateToString = (value: SearchResult) : string  => {
-    const companyName = React.createElement('div')
-    const companyCode = React.createElement('div')
-    
-    return ``
   }
 
-  const companySearchList : [] = []
-  companyNameCode(searchCategory,searchTerm).then(value => {
-    companySearchList.push()
-  })
+
+
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="GET">
         <select onChange={handleCategoryChange} value={searchCategory}>
           <option value="name">회사명</option>
           <option value="code">회사코드</option>
@@ -50,7 +41,7 @@ const SearchPage = () => {
         <input type="submit" value="확인" />
       </form>
       <ul>
-        "<li>리스트</li>"
+        
       </ul>
     </div>
   );

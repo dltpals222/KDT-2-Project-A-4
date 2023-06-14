@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import path from "path";
 import { connectToMariaDB, runQuery } from "./mariadb";
-import { PoolConnection } from "mariadb";
+import { Pool, PoolConnection } from "mariadb";
 
 // 익스프레스 앱서버 시작.
 const app = express();
@@ -24,6 +24,23 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
+
+app.get("/api/main/search", async (req:Request, res:Response) => {
+  const companyDate = req.body;
+  let connection : PoolConnection | undefined;
+  console.log(companyDate)
+  try{
+    connection = await connectToMariaDB();
+    const query = `select no, code, name from companylist where ${companyDate.searchCategory} like '%${companyDate.searchTerm}%'`
+    
+  } catch(error) {
+    console.error("검색에러" , error)
+  } finally {
+    if(connection) {
+      connection.end();
+    }
+  }
+})
 
 app.post("/signup", async (req: Request, res: Response) => {
   const data = req.body;

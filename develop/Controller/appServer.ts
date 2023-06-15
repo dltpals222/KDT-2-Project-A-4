@@ -32,6 +32,7 @@ app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// 검색할 때 form의 정보를 받아옴
 app.get("/api/main/search", async (req:Request, res:Response) => {
   const companyDate = req.query;
   let connection : PoolConnection | undefined;

@@ -1,4 +1,3 @@
-import { response } from "express";
 import * as React from "react";
 import { useState, ChangeEvent, FormEvent, SetStateAction } from "react";
 
@@ -10,10 +9,10 @@ interface SearchResult {
 
 //검색 로직 작성 중
 const SearchPage = () => {
-  const [searchTerm, setSearchTerm] = useState<string|number>("");
-  const [searchCategory, setSearchCategory] = useState<string>("name");
-  const [searchResult, setSearchResult] = useState<[]>([])
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
+  const [searchTerm, setSearchTerm] = useState<string|number>(""); // 검색어
+  const [searchCategory, setSearchCategory] = useState<string>("name"); // 검색카테고리
+  const [searchResult, setSearchResult] = useState<[]>([]); //appServer에서 받아온 정보를 담음
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false); //검색버튼 누를 시 변화 감지를 위한 값
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(event.target.value);
@@ -23,12 +22,12 @@ const SearchPage = () => {
     setSearchCategory(event.target.value);
   };
 
-  
+  //버튼누를 시 감지
   const handleSubmit = (event: FormEvent<HTMLFormElement>)=> {
     event.preventDefault();
     setIsSubmitted(true)
   }
-
+  //버튼 누른 후 appServer에서 처리된 DB데이터를 받아옴
   React.useEffect(() => {
     if(isSubmitted){
       fetch(`/api/main/search?searchCategory=${searchCategory}&searchTerm=${searchTerm}`)
@@ -38,9 +37,6 @@ const SearchPage = () => {
       setIsSubmitted(false)
     }},[isSubmitted]);
     
-
-
-
 
   return (
     <div>

@@ -35,14 +35,14 @@ app.get("/", (req: Request, res: Response) => {
 app.get("/api/main/search", async (req:Request, res:Response) => {
   const companyDate = req.query;
   let connection : PoolConnection | undefined;
-  console.log(companyDate)
   try{
     connection = await connectToMariaDB();
     const query = `select no, code, name from companylist where ${companyDate.searchCategory} like '%${companyDate.searchTerm}%'`
     const result = await runQuery(connection, query)
-    console.log("DB조회 결과",result)
+    console.log("DB조회 결과 length길이는 ",result.length," 입니다.")
     res.json(result)
   } catch(error) {
+    //에러 처리
     console.error("검색에러" , error)
     res.status(500).json({error:"검색에러 발생"})
   } finally {

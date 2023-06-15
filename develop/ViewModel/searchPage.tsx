@@ -1,9 +1,9 @@
+import { response } from "express";
 import * as React from "react";
 import { useState, ChangeEvent, FormEvent, SetStateAction } from "react";
 
 //검색결과
 interface SearchResult {
-  no : number;
   name : string;
   code : string;
 }
@@ -12,7 +12,8 @@ interface SearchResult {
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState<string|number>("");
   const [searchCategory, setSearchCategory] = useState<string>("name");
-  const [companyDateToString,setCompanyDateToString ] = useState<Promise<any>>()
+  const [searchResult, setSearchResult] = useState<[]>([])
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(event.target.value);
@@ -22,10 +23,21 @@ const SearchPage = () => {
     setSearchCategory(event.target.value);
   };
 
+  
   const handleSubmit = (event: FormEvent<HTMLFormElement>)=> {
     event.preventDefault();
-
+    setIsSubmitted(true)
   }
+
+  React.useEffect(() => {
+    if(isSubmitted){
+      fetch(`/api/main/search?searchCategory=${searchCategory}&searchTerm=${searchTerm}`)
+      .then(response => response.json())
+      .then(data => setSearchResult(data))
+      .catch(error => console.error("Fetch 요청 에러",error))
+      setIsSubmitted(false)
+    }},[isSubmitted]);
+    
 
 
 
@@ -41,7 +53,12 @@ const SearchPage = () => {
         <input type="submit" value="확인" />
       </form>
       <ul>
-        
+        {searchResult.map(((element : SearchResult) => (
+          (<li key={element.code}>
+            <div>회사명 : {element.name}</div>
+            <div>회사코드 : {element.code}</div>
+          </li>)
+        )))}
       </ul>
     </div>
   );

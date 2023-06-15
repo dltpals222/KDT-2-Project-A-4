@@ -4,6 +4,7 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 function DrawEvent() {
   const [inputs, setInputs] = useState<string[]>([]);
   const [outputs, setOutputs] = useState<string[]>([]);
+  const [showMessage, setShowMessage] = useState<boolean>(false)
   const [error, setError] = useState<string>("");
   const [count, setCount] = useState<number>(0);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false)
@@ -34,6 +35,7 @@ function DrawEvent() {
     const newInputs = [...inputs];
     newInputs[index] = event.target.value;
     setInputs(newInputs);
+    setShowMessage(false);
   };
   //input을 삭제 하기 위한 로직 
   const handleDelete = (): void => {
@@ -46,14 +48,24 @@ function DrawEvent() {
     setInputs(updatedInputs);
   };
   //사용자 입력값을 setOutputs에 데이터 저장
-  const handleConfirm = (event: FormEvent): void => {
+  const handleConfirm = (event:  FormEvent<HTMLFormElement>): void => {
     event.preventDefault(); // 기본 폼 제출 동작 방지
     setOutputs(inputs);
         if(inputs.some(value=>value.trim()==="")){
       setError("주식종목을 빈칸 없이 모두 입력해주세요.");
     }else{
       setError("");
+      event.preventDefault();
+      setShowMessage(true)
     }
+  };
+  //랜덤으로 뽑은 입력값을 출력하기위한 프로퍼티
+  const PropsComponent: React.FC<stocksType> = ({ stock }) => {
+    return (
+      <div>
+        <div>{`${stock}`.length > 0 &&`${inputs.length}개의 종목 중 하나인 ${stock} 당첨!!!`}</div>
+      </div>
+    );
   };
   //사용자 입력 값을 랜덤으로 하나 뽑기 위한 로직 (미완성)
   const handleRandomStocks  = ()=> {
@@ -65,14 +77,6 @@ function DrawEvent() {
   interface stocksType{
     stock : string[]
   }
-  //랜덤으로 뽑은 입력값을 출력하기위한 프로퍼티
-  const PropsComponent: React.FC<stocksType> = ({ stock }) => {
-    return (
-      <div>
-        <div>{`${stock}`.length > 0 &&`${inputs.length}개의 종목 중 하나인 ${stock} 당첨!!!`}</div>
-      </div>
-    );
-  };
   
   return (
     <div>
@@ -102,7 +106,7 @@ function DrawEvent() {
       {outputs.map((output, index) => (
         <div key={index}>입력한 주식 종목: {output}</div>
       ))}
-        {!error && <PropsComponent stock={handleRandomStocks()} />}
+        {showMessage&& <PropsComponent stock={handleRandomStocks()} />}
         {error && <h1 style={{color : "red"}}>{error}</h1>}
 
       </div>

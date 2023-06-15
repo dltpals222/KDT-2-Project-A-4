@@ -46,7 +46,9 @@ function LuckPage() {
   useEffect(()=>{
     const saveDate = localStorage.getItem("clickedButtonDate");
     const currentDate = new Date().toLocaleDateString();
-    
+    //데이터베이스에서 유저 id 값이 나오면 쓸 로직
+    /* const userId = 'user123'; // 각 회원을 식별할 고유한 식별자
+    const storageKey = `clickedButtonDate_${userId}`; // 식별자를 사용하여  */localStorage의 키 생성
     //밑에 주석은 버튼을 한번 누르면 버튼이 비활성화 되므로 날짜를 바꿔줘야해서 남겨둠
     // const currentDate = "2023-06-11";
 

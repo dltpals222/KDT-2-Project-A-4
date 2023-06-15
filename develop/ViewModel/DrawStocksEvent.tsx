@@ -11,20 +11,22 @@ function DrawEvent() {
 
 //클릭시 5번의 횟수 제한 + 버튼 잠금 만들어야함 
   useEffect(()=>{
-    const saveDate = localStorage.getItem("clickedButtonDate");
+    const saveDate = localStorage.getItem("DrawStocksButtonClickDate");
     const currentDate = new Date().toLocaleDateString();
-    
     if(saveDate === currentDate){
-      const savedClickButton = localStorage.getItem("isButtonClicked")
+      
+      const savedClickButton = localStorage.getItem("DrawStocksButtonClicked")
       if(savedClickButton === "true"){
         setButtonDisabled(true)
       }
+      
     }else{
-      localStorage.setItem("clickedButtonDate",currentDate)
-      localStorage.setItem("isButtonClicked","false")
+      localStorage.setItem("DrawStocksButtonClickDate",currentDate)
+      localStorage.setItem("DrawStocksButtonClicked","false")
       setButtonDisabled(false)
     }
   },[])
+  // setCount(count => count+1)
   
   //input을 생성 하기 위한 로직
   const handleCreate = (): void => {
@@ -100,7 +102,7 @@ function DrawEvent() {
       <button type="button" onClick={handleDelete}>
         종목 삭제
       </button>
-        <button type="submit" >종목 뽑기</button>
+        <button type="submit" disabled={buttonDisabled} >종목 뽑기</button>
       </form>
       <div>
       {outputs.map((output, index) => (

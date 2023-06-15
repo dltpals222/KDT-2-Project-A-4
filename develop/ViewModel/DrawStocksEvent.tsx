@@ -76,6 +76,7 @@ function DrawEvent() {
     return [randomStocks];
   };
 
+
   interface stocksType{
     stock : string[]
   }

@@ -33,13 +33,13 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/api/main/search", async (req:Request, res:Response) => {
-  const companyDate = req.body;
+  const companyDate = req.query;
   let connection : PoolConnection | undefined;
   console.log(companyDate)
   try{
     connection = await connectToMariaDB();
     const query = `select no, code, name from companylist where ${companyDate.searchCategory} like '%${companyDate.searchTerm}%'`
-    
+    const result = await runQuery(connection, query)
   } catch(error) {
     console.error("검색에러" , error)
   } finally {

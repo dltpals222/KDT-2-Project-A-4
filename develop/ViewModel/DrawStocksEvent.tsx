@@ -83,6 +83,9 @@ function DrawEvent() {
       localStorage.setItem("DrawStocksButtonClicked","true")
     }
   },[count])
+  interface stocksType{
+    stock : string[]
+  }
   //랜덤으로 뽑은 입력값을 출력하기위한 프로퍼티
   const PropsComponent: React.FC<stocksType> = ({ stock }) => {
     return (
@@ -92,10 +95,7 @@ function DrawEvent() {
     );
   };
 
-  interface stocksType{
-    stock : string[]
-  }
-  
+
   return (
     <div>
       <h1>주식 종목 뽑기</h1>

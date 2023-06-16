@@ -17,6 +17,8 @@ function DrawEvent() {
     const currentDate = new Date().toLocaleDateString();
     // const currentDate = "2023-06-11";
 
+    // const currentDate = "2023-06-11";
+
     if(saveDate === currentDate){
       const savedClickButton = localStorage.getItem("DrawStocksButtonClicked")
       if(savedClickButton === "true"){
@@ -25,10 +27,12 @@ function DrawEvent() {
       
     }else{
       sessionStorage.setItem(storageKey,currentDate)
+      sessionStorage.setItem(storageKey,currentDate)
       localStorage.setItem("DrawStocksButtonClicked","false")
       setButtonDisabled(false)
     }
   },[])
+
 
   
   //input을 생성 하기 위한 로직
@@ -114,6 +118,7 @@ function DrawEvent() {
       <button type="button" onClick={handleDelete}>
         종목 삭제
       </button>
+        <button type="submit" disabled={buttonDisabled} onClick={handleButtonClick} >종목 뽑기</button>
         <button type="submit" disabled={buttonDisabled} onClick={handleButtonClick} >종목 뽑기</button>
       </form>
       <div>

@@ -15,6 +15,7 @@ function DrawEvent() {
     const storageKey = `clickedButtonDate_${sessionUserID}`
     const saveDate = sessionStorage.getItem(storageKey);
     const currentDate = new Date().toLocaleDateString();
+    // const currentDate = "2023-06-11";
 
     if(saveDate === currentDate){
       const savedClickButton = localStorage.getItem("DrawStocksButtonClicked")
@@ -28,7 +29,7 @@ function DrawEvent() {
       setButtonDisabled(false)
     }
   },[])
-  // setCount(count => count+1)
+
   
   //input을 생성 하기 위한 로직
   const handleCreate = (): void => {
@@ -63,6 +64,21 @@ function DrawEvent() {
       setShowMessage(true)
     }
   };
+  //사용자 입력 값을 랜덤으로 하나 뽑기 위한 로직 (미완성)
+  const handleRandomStocks  = ()=> {
+    const randomStocksIndex : number = Math.floor(Math.random() * outputs.length);
+    const randomStocks = outputs[randomStocksIndex]
+    return [randomStocks];
+  };
+  const handleButtonClick = () => {
+    setCount(count => count+1)
+  }
+  useEffect(() => {
+    if(count >= 2 ){
+      setButtonDisabled(true)
+      localStorage.setItem("DrawStocksButtonClicked","true")
+    }
+  },[count])
   //랜덤으로 뽑은 입력값을 출력하기위한 프로퍼티
   const PropsComponent: React.FC<stocksType> = ({ stock }) => {
     return (
@@ -71,14 +87,6 @@ function DrawEvent() {
       </div>
     );
   };
-  //사용자 입력 값을 랜덤으로 하나 뽑기 위한 로직 (미완성)
-  const handleRandomStocks  = ()=> {
-    const randomStocksIndex : number = Math.floor(Math.random() * outputs.length);
-    const randomStocks = outputs[randomStocksIndex]
-    localStorage.setItem("DrawStocksButtonClicked","true")
-    return [randomStocks];
-  };
-
 
   interface stocksType{
     stock : string[]
@@ -106,7 +114,7 @@ function DrawEvent() {
       <button type="button" onClick={handleDelete}>
         종목 삭제
       </button>
-        <button type="submit" disabled={buttonDisabled} >종목 뽑기</button>
+        <button type="submit" disabled={buttonDisabled} onClick={handleButtonClick} >종목 뽑기</button>
       </form>
       <div>
       {outputs.map((output, index) => (

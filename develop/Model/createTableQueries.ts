@@ -12,7 +12,7 @@ function newAccountTable(userid: string): string {
           \`shareSelloutPrice\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매도 단가',
           PRIMARY KEY (\`accountIndex\`) USING BTREE,
           INDEX \`companyCode\` (\`companycode\`) USING BTREE,
-          CONSTRAINT \`companyCode\` FOREIGN KEY (\`companycode\`) REFERENCES \`companylist\` (\`code\`) ON UPDATE NO ACTION ON DELETE NO ACTION
+          CONSTRAINT \`fk_${userid}_account_companyCode\` FOREIGN KEY (\`companycode\`) REFERENCES \`companylist\` (\`code\`) ON UPDATE NO ACTION ON DELETE NO ACTION
       )
       COMMENT='${userid} 사용자용 모의투자 계좌.'
       COLLATE='utf8mb4_unicode_ci'
@@ -57,7 +57,7 @@ function newStocksTable(userid: string): string {
         \`stockName\` VARCHAR(50) NULL DEFAULT '' COLLATE 'utf8mb3_general_ci',
         \`stockBalance\` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '보유 주식 양',
         PRIMARY KEY (\`stockCode\`) USING BTREE,
-        CONSTRAINT \`stockCode\` FOREIGN KEY (\`stockCode\`) REFERENCES \`companylist\` (\`code\`) ON UPDATE NO ACTION ON DELETE NO ACTION
+        CONSTRAINT \`fk_${userid}_stock_stockCode\` FOREIGN KEY (\`stockCode\`) REFERENCES \`companylist\` (\`code\`) ON UPDATE NO ACTION ON DELETE NO ACTION
     )
     COMMENT='${userid} 사용자의 보유 주식'
     COLLATE='utf8mb3_general_ci'

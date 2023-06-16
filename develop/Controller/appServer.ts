@@ -68,9 +68,12 @@ app.post("/signup", async (req: Request, res: Response) => {
       res.json({ success: false, reason: "등록된 회원이 있습니다." });
     } else {
       console.log("회원가입 성공!");
+      // 회원 등록 쿼리문
       const insertQuery = `INSERT INTO userinfo (userid, userpwd) VALUES ('${signUpData.id}', '${signUpData.pwd}')`;
       await runQuery(connection, insertQuery);
-      await 
+      // 신규 회원용 DB 테이블들 생성 쿼리문
+      const createQueries = createTableQueries(signUpData.id);
+      await runQueries(connection, createQueries);
       res.json({ success: true });
     }
   } catch (error) {

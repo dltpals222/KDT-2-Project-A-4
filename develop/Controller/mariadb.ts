@@ -64,7 +64,7 @@ export async function connectToMariaDB(): Promise<mariadb.PoolConnection> {
  *
  * 사용방법 :
  *
- * const `변수명` = runQuery(`연결성공한 커넥션`,`보낼 쿼리문`);
+ * const `변수명` = await runQuery(`연결성공한 커넥션`,`보낼 쿼리문`);
  *
  * @param connection  실행된 커낵션 풀. connectToMariaDB가 할당된 connection을 여기에 넣는다.
  * @param query `String`타입 보낼 쿼리문.
@@ -88,6 +88,10 @@ export async function runQuery(
 
 /**
  * 연결된 커넥션을 통해 여러 개의 쿼리를 처리하는 함수, 보낼 쿼리문들은 배열에 담아 매개변수에 넣는다.
+ * 
+ * 사용방법 :
+ *
+ * const `변수명` = await runQueries(`연결성공한 커넥션`,`[...보낼 쿼리문들]`);
  * 
  * @param connection 실행된 커넥션 풀
  * @param queries `string[]` 타입, 실행할 쿼리 배열

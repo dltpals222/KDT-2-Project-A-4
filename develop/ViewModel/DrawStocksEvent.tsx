@@ -27,7 +27,6 @@ function DrawEvent() {
       
     }else{
       sessionStorage.setItem(storageKey,currentDate)
-      sessionStorage.setItem(storageKey,currentDate)
       localStorage.setItem("DrawStocksButtonClicked","false")
       setButtonDisabled(false)
     }
@@ -118,7 +117,6 @@ function DrawEvent() {
       <button type="button" onClick={handleDelete}>
         종목 삭제
       </button>
-        <button type="submit" disabled={buttonDisabled} onClick={handleButtonClick} >종목 뽑기</button>
         <button type="submit" disabled={buttonDisabled} onClick={handleButtonClick} >종목 뽑기</button>
       </form>
       <div>

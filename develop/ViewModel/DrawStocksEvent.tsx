@@ -11,17 +11,19 @@ function DrawEvent() {
 
 //클릭시 5번의 횟수 제한 + 버튼 잠금 만들어야함 
   useEffect(()=>{
-    const saveDate = localStorage.getItem("DrawStocksButtonClickDate");
+    const sessionUserID = sessionStorage.getItem("sessionId")
+    const storageKey = `clickedButtonDate_${sessionUserID}`
+    const saveDate = sessionStorage.getItem(storageKey);
     const currentDate = new Date().toLocaleDateString();
+
     if(saveDate === currentDate){
-      
       const savedClickButton = localStorage.getItem("DrawStocksButtonClicked")
       if(savedClickButton === "true"){
         setButtonDisabled(true)
       }
       
     }else{
-      localStorage.setItem("DrawStocksButtonClickDate",currentDate)
+      sessionStorage.setItem(storageKey,currentDate)
       localStorage.setItem("DrawStocksButtonClicked","false")
       setButtonDisabled(false)
     }
@@ -73,6 +75,7 @@ function DrawEvent() {
   const handleRandomStocks  = ()=> {
     const randomStocksIndex : number = Math.floor(Math.random() * outputs.length);
     const randomStocks = outputs[randomStocksIndex]
+    localStorage.setItem("DrawStocksButtonClicked","true")
     return [randomStocks];
   };
 

@@ -23,7 +23,7 @@ function newAccountTable(userid: string): string {
 }
 
 function newGachaTable(userid: string): string {
-  const createGachaTableQuery = `CREATE TABLE \${userid}_gacha\` (
+  const createGachaTableQuery = `CREATE TABLE \`${userid}_gacha\` (
           \`gachaIndex\` INT(10) NOT NULL AUTO_INCREMENT COMMENT '가챠 인덱스',
           \`gachaDate\` TIMESTAMP NOT NULL DEFAULT current_timestamp() COMMENT '가챠 날짜',
           \`gachaList\` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '가챠 리스트' COLLATE 'utf8mb4_unicode_ci',

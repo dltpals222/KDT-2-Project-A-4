@@ -11,6 +11,7 @@ financialDate.get('/',async(req:Request, res:Response) => {
     connection = await connectToMariaDB();
     const query = ['select * from kospi_005930_d order by day desc limit 60'];
     const result = await runQueries(connection,query);
+    console.log('삼성 정보입니다.' , result)
   } catch (error){
     console.error('main에서 DB연결에 실패했습니다.', error);
     res.status(500).json({error:"chart 에러 발생"});

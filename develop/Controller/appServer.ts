@@ -4,7 +4,7 @@ import { connectToMariaDB, runQuery, runQueries } from "./mariadb";
 import createTableQueries from "../Model/createTableQueries";
 import { PoolConnection } from "mariadb";
 import { v4 as uuidv4 } from 'uuid';
-import financialDate from "./router/financialDate";
+import financialDate from "./GetPost/financialDate";
 
 // 익스프레스 앱서버 시작.
 const app = express();

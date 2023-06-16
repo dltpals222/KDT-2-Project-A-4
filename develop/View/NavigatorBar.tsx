@@ -18,6 +18,9 @@ function Navi() : JSX.Element {
             <Link to="/chart">
             <button>차트 페이지</button>
             </Link>
+            <Link to="/chart">
+            <button>차트 페이지</button>
+            </Link>
         </nav>
   );
 }

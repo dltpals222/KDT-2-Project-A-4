@@ -88,6 +88,7 @@ function DrawEvent() {
     );
   };
 
+
   interface stocksType{
     stock : string[]
   }

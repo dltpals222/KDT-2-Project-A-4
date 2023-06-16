@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import path from "path";
-import { connectToMariaDB, runQuery } from "./mariadb";
+import { connectToMariaDB, runQuery, runQueries } from "./mariadb";
+import createTableQueries from "../Model/createTableQueries";
 import { PoolConnection } from "mariadb";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -30,6 +31,7 @@ app.use(express.json());
 // 기본 도메인주소 요청 수신시 시작 Html 파일 전송.(HTML안에 번들 파일 연결 예정)
 app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "index.html"));
+  
 });
 
 // 검색할 때 form의 정보를 받아옴
@@ -68,6 +70,7 @@ app.post("/signup", async (req: Request, res: Response) => {
       console.log("회원가입 성공!");
       const insertQuery = `INSERT INTO userinfo (userid, userpwd) VALUES ('${signUpData.id}', '${signUpData.pwd}')`;
       await runQuery(connection, insertQuery);
+      await 
       res.json({ success: true });
     }
   } catch (error) {
@@ -108,6 +111,8 @@ app.post("/login", async (req: Request, res: Response) => {
       res.json({ success: false, reason: "암호가 일치하지 않습니다." });
     }
 
+
+    
   } catch(error) {
     console.error(error);
   } finally {

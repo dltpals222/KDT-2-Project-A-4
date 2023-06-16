@@ -60,7 +60,7 @@ export async function connectToMariaDB(): Promise<mariadb.PoolConnection> {
 // 쿼리 실행 함수
 /**
  *
- * 연결이 된 라인을 통해 쿼리문을 보내고 릴리즈한다.
+ * 연결된 커넥션을 통해 쿼리문을 보내고 릴리즈한다.
  *
  * 사용방법 :
  *
@@ -85,6 +85,14 @@ export async function runQuery(
   }
 }
 
+
+/**
+ * 연결된 커넥션을 통해 여러 개의 쿼리를 처리하는 함수, 보낼 쿼리문들은 배열에 담아 매개변수에 넣는다.
+ * 
+ * @param connection 실행된 커넥션 풀
+ * @param queries `string[]` 타입, 실행할 쿼리 배열
+ * @returns Promise<any[]>
+ */
 export async function runQueries(
   connection: mariadb.PoolConnection,
   queries: string[]

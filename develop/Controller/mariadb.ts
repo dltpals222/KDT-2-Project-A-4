@@ -98,7 +98,7 @@ export async function runQueries(
   queries: string[]
 ): Promise<any[]> {
   try {
-    let results = Promise.all(
+    let results = await Promise.all(
       queries.map((query) => {
         connection.query(query);
       })

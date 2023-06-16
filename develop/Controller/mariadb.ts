@@ -100,10 +100,10 @@ export async function runQueries(
   try {
     let results = await Promise.all(
       queries.map((query) => {
-        connection.query(query);
+        console.log(connection.query(query));
+        
       })
     );
-    console.log(results);
     return results;
   } catch (error) {
     console.error("다중 쿼리 실행 오류:", error);

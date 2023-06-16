@@ -81,3 +81,7 @@ export async function runQuery(connection: mariadb.PoolConnection, query: string
     connection.release(); // 연결 반환
   }
 }
+
+export async function runQueries(){
+
+}

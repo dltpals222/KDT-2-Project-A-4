@@ -66,3 +66,18 @@ function newStocksTable(userid: string): string {
     `;
   return createStockTableQuery;
 }
+/**
+ * 신규 회원가입시 회원 고유의 데이터를 저장할 개인 DB 테이블을 생성할 명령 쿼리문 배열 API
+ * 
+ * @param userid `string` : 테이블을 생성할 회원 id
+ * @returns `string[]` : 신규 회원을 위한 개인 DB 테이블 생성 쿼리문 배열
+ */
+export default function createTableQueries(userid: string): string[] {
+  const queries: string[] = new Array();
+  queries.push(newAccountTable(userid));
+  queries.push(newStocksTable(userid));
+  queries.push(newTodayLuckTable(userid));
+  queries.push(newGachaTable(userid));
+
+  return queries;
+}

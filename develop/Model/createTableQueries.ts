@@ -1,24 +1,69 @@
 function newAccountTable(userid: string): string {
   const createAccountTableQuery = `CREATE TABLE \`${userid}_account\` (
-          \`accountIndex\` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '계좌 인덱스',
-          \`accountDate\` TIMESTAMP NULL DEFAULT current_timestamp() COMMENT '거래 날짜',
-          \`accountDeposit\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '입금 기록',
-          \`accountWithdraw\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '출금 기록',
-          \`accountBalance\` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '계좌 잔액',
-          \`companycode\` VARCHAR(15) NOT NULL DEFAULT '' COMMENT '거래한 회사 주 코드' COLLATE 'utf8mb3_general_ci',
-          \`shareBuyoutCount\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매수 량',
-          \`shareBuyoutPrice\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매수 단가',
-          \`shareSelloutCount\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매도 량',
-          \`shareSelloutPrice\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매도 단가',
-          PRIMARY KEY (\`accountIndex\`) USING BTREE,
-          INDEX \`companyCode\` (\`companycode\`) USING BTREE,
-          CONSTRAINT \`fk_${userid}_account_companyCode\` FOREIGN KEY (\`companycode\`) REFERENCES \`companylist\` (\`code\`) ON UPDATE NO ACTION ON DELETE NO ACTION
-      )
-      COMMENT='${userid} 사용자용 모의투자 계좌.'
-      COLLATE='utf8mb4_unicode_ci'
-      ENGINE=InnoDB
-      ;
-      `;
+    \`accountIndex\` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '계좌 인덱스',
+    \`accountDate\` TIMESTAMP NULL DEFAULT current_timestamp() COMMENT '거래 날짜',
+    \`accountDeposit\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '입금 기록',
+    \`accountWithdraw\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '출금 기록',
+    \`accountBalance\` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '계좌 잔액',
+    \`companyCode\` VARCHAR(15) NOT NULL DEFAULT '' COMMENT '거래한 회사 주 코드' COLLATE 'utf8mb3_general_ci',
+    \`shareBuyoutCount\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매수 량',
+    \`shareBuyoutPrice\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매수 단가',
+    \`shareSelloutCount\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매도 량',
+    \`shareSelloutPrice\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매도 단가',
+    PRIMARY KEY (\`accountIndex\`) USING BTREE,
+    INDEX \`companyCode\` (\`companycode\`) USING BTREE,
+    CONSTRAINT \`fk_${userid}_account_companyCode\` FOREIGN KEY (\`companyCode\`) REFERENCES \`companylist\` (\`code\`) ON UPDATE NO ACTION ON DELETE NO ACTION
+  )
+  COMMENT='${userid} 사용자용 모의투자 계좌.'
+  COLLATE='utf8mb4_unicode_ci'
+  ENGINE=InnoDB
+  ;
+  
+  DELIMITER //
+  CREATE TRIGGER update_balance_trigger
+  AFTER INSERT ON \`${userid}_account\` FOR EACH ROW
+  BEGIN
+    IF NEW.accountDeposit IS NOT NULL THEN
+      UPDATE \`${userid}_account\` SET accountBalance = accountBalance + NEW.accountDeposit WHERE accountIndex = NEW.accountIndex;
+    END IF;
+    IF NEW.accountWithdraw IS NOT NULL THEN
+      UPDATE \`${userid}_account\` SET accountBalance = accountBalance - NEW.accountWithdraw WHERE accountIndex = NEW.accountIndex;
+    END IF;
+  END //
+
+  CREATE TRIGGER update_stock_balance_trigger
+  AFTER INSERT ON \`${userid}_account\` FOR EACH ROW
+  BEGIN
+    DECLARE stockCount INT;
+
+    -- Check if shareBuyoutCount is not null and positive
+    IF NEW.shareBuyoutCount IS NOT NULL AND NEW.shareBuyoutCount > 0 THEN
+      -- Get stock count for the company code
+      SELECT stockBalance INTO stockCount FROM \`${userid}_stocks\` WHERE stockCode = NEW.companyCode;
+      
+      IF stockCount IS NOT NULL THEN
+        -- Update existing stock record
+        UPDATE \`${userid}_stocks\` SET stockBalance = stockBalance + NEW.shareBuyoutCount WHERE stockCode = NEW.companyCode;
+      ELSE
+        -- Insert new stock record
+        INSERT INTO \`${userid}_stocks\` (stockCode, stockBalance) VALUES (NEW.companyCode, NEW.shareBuyoutCount);
+      END IF;
+    END IF;
+
+    -- Check if shareSelloutCount is not null and positive
+    IF NEW.shareSelloutCount IS NOT NULL AND NEW.shareSelloutCount > 0 THEN
+      -- Get stock count for the company code
+      SELECT stockBalance INTO stockCount FROM \`${userid}_stocks\` WHERE stockCode = NEW.companyCode;
+      
+      IF stockCount IS NOT NULL AND stockCount >= NEW.shareSelloutCount THEN
+        -- Update existing stock record
+        UPDATE \`${userid}_stocks\` SET stockBalance = stockBalance - NEW.shareSelloutCount WHERE stockCode = NEW.companyCode;
+      END IF;
+    END IF;
+  END //
+
+  DELIMITER ;
+  `;
   return createAccountTableQuery;
 }
 
@@ -52,7 +97,7 @@ function newTodayLuckTable(userid: string): string {
 }
 
 function newStocksTable(userid: string): string {
-  const createStockTableQuery = `CREATE TABLE \`${userid}_stock\` (
+  const createStockTableQuery = `CREATE TABLE \`${userid}_stocks\` (
         \`stockCode\` VARCHAR(15) NOT NULL DEFAULT '' COLLATE 'utf8mb3_general_ci',
         \`stockName\` VARCHAR(50) NULL DEFAULT '' COLLATE 'utf8mb3_general_ci',
         \`stockBalance\` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '보유 주식 양',

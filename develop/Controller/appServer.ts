@@ -3,6 +3,7 @@ import path from "path";
 import { connectToMariaDB, runQuery } from "./mariadb";
 import { PoolConnection } from "mariadb";
 import { v4 as uuidv4 } from 'uuid';
+import financialDate from "./router/financialDate";
 
 // 익스프레스 앱서버 시작.
 const app = express();
@@ -31,6 +32,9 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
+
+// 차트 데이터 DB에 연결하는 로직
+app.use(financialDate)
 
 // 검색할 때 form의 정보를 받아옴
 app.get("/api/main/search", async (req:Request, res:Response) => {

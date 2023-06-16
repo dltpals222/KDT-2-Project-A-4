@@ -83,4 +83,13 @@ export async function runQuery(connection: mariadb.PoolConnection, query: string
 }
 
 export async function runQueries(connection: mariadb.PoolConnection, queries: string[]): Promise<any[]>{
+  try {
+    let result : string[] = [];
+    return result;
+  } catch (error) {
+    console.error('다중 쿼리 실행 오류:', error);
+    throw error;
+  } finally {
+    connection.release();
+  }
 }

@@ -11,7 +11,7 @@ function newAccountTable(userid: string): string {
     \`shareSelloutCount\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매도 량',
     \`shareSelloutPrice\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매도 단가',
     PRIMARY KEY (\`accountIndex\`) USING BTREE,
-    INDEX \`companyCode\` (\`companycode\`) USING BTREE,
+    INDEX \`companyCode\` (\`companyCode\`) USING BTREE,
     CONSTRAINT \`fk_${userid}_account_companyCode\` FOREIGN KEY (\`companyCode\`) REFERENCES \`companylist\` (\`code\`) ON UPDATE NO ACTION ON DELETE NO ACTION
   )
   COMMENT='${userid} 사용자용 모의투자 계좌.'

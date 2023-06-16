@@ -82,6 +82,5 @@ export async function runQuery(connection: mariadb.PoolConnection, query: string
   }
 }
 
-export async function runQueries(){
-
+export async function runQueries(connection: mariadb.PoolConnection, queries: string[]): Promise<any[]>{
 }

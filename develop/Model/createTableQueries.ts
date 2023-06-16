@@ -53,7 +53,7 @@ function newTodayLuckTable(userid: string): string {
 
 function newStocksTable(userid: string): string {
   const createStockTableQuery = `CREATE TABLE \`${userid}_stock\` (
-        \`stockCod\` VARCHAR(15) NOT NULL DEFAULT '' COLLATE 'utf8mb3_general_ci',
+        \`stockCode\` VARCHAR(15) NOT NULL DEFAULT '' COLLATE 'utf8mb3_general_ci',
         \`stockName\` VARCHAR(50) NULL DEFAULT '' COLLATE 'utf8mb3_general_ci',
         \`stockBalance\` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '보유 주식 양',
         PRIMARY KEY (\`stockCode\`) USING BTREE,

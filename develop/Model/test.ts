@@ -1,3 +1,16 @@
+import { connectToMariaDB, runQueries } from "../Controller/mariadb";
+import { PoolConnection } from "mariadb";
 import createTableQueries from "./createTableQueries";
 
-console.log(createTableQueries("dgchoi3904"));
+async function test() : Promise<void>{
+    let connection : PoolConnection | undefined;
+
+connection = await connectToMariaDB();
+const queries = createTableQueries("dgchoi3904");
+
+const result = await runQueries(connection, queries);
+
+console.log(result);
+}
+
+test();

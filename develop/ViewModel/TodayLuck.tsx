@@ -45,7 +45,7 @@ function LuckPage() {
   
   useEffect(()=>{
     const sessionUserID = sessionStorage.getItem("sessionId")
-    const storageKey = `clickedButtonDate_${sessionUserID}`
+    const storageKey = `todayClickedButtonDate_${sessionUserID}`
     const saveDate = sessionStorage.getItem(storageKey);
     const currentDate = new Date().toLocaleDateString();
 

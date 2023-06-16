@@ -9,16 +9,17 @@ function DrawEvent() {
   const [count, setCount] = useState<number>(0);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false)
 
-//클릭시 5번의 횟수 제한 + 버튼 잠금 만들어야함 
+  //클릭시 5번의 횟수 제한 + 버튼 잠금 만들어야함 
   useEffect(()=>{
-    const sessionUserID = sessionStorage.getItem("sessionId")
-    const storageKey = `clickedButtonDate_${sessionUserID}`
+    //기본 input을 주어지게 하기 위해 input을 하나 생성
+    setInputs([...inputs, ""]);
+    const sessionUserIdDraw = sessionStorage.getItem("sessionId")
+    const storageKey = `drawClickedButtonDate_${sessionUserIdDraw}`
     const saveDate = sessionStorage.getItem(storageKey);
-    const currentDate = new Date().toLocaleDateString();
-    // const currentDate = "2023-06-11";
-
-    // const currentDate = "2023-06-11";
-
+    // const currentDate = new Date().toLocaleDateString();
+    const currentDate = "2023-06-11";
+    
+    //날짜가 동일할시 버튼 disabled
     if(saveDate === currentDate){
       const savedClickButton = localStorage.getItem("DrawStocksButtonClicked")
       if(savedClickButton === "true"){
@@ -47,7 +48,8 @@ function DrawEvent() {
   };
   //input을 삭제 하기 위한 로직 
   const handleDelete = (): void => {
-    if (inputs.length === 0) {
+    //기본값 input하나를 삭제시키지 않게 하기 위해 inputs.length 를 1값을 줌
+    if (inputs.length === 1) {
       return;
     }
     const updatedInputs: string[] = [...inputs];
@@ -59,12 +61,16 @@ function DrawEvent() {
   const handleConfirm = (event:  FormEvent<HTMLFormElement>): void => {
     event.preventDefault(); // 기본 폼 제출 동작 방지
     setOutputs(inputs);
-        if(inputs.some(value=>value.trim()==="")){
+    if(inputs.some(value=>value.trim()==="")){
       setError("주식종목을 빈칸 없이 모두 입력해주세요.");
-    }else{
+    }
+    else{
       setError("");
       event.preventDefault();
       setShowMessage(true)
+      //메세지가 출력함과 동시에 카운트 1을 세어줌 
+      //추후 카운트가 5가되면 버튼이 disabled가 됨
+      setCount(count => count+1)
     }
   };
   //사용자 입력 값을 랜덤으로 하나 뽑기 위한 로직 (미완성)
@@ -73,11 +79,8 @@ function DrawEvent() {
     const randomStocks = outputs[randomStocksIndex]
     return [randomStocks];
   };
-  const handleButtonClick = () => {
-    setCount(count => count+1)
-  }
   useEffect(() => {
-    if(count >= 2 ){
+    if(count >= 5 ){
       setButtonDisabled(true)
       localStorage.setItem("DrawStocksButtonClicked","true")
     }
@@ -117,7 +120,7 @@ function DrawEvent() {
       <button type="button" onClick={handleDelete}>
         종목 삭제
       </button>
-        <button type="submit" disabled={buttonDisabled} onClick={handleButtonClick} >종목 뽑기</button>
+        <button type="submit" disabled={buttonDisabled} >종목 뽑기</button>
       </form>
       <div>
       {outputs.map((output, index) => (

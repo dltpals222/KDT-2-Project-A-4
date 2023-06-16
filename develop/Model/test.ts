@@ -1,4 +1,4 @@
-import { connectToMariaDB, runQueries } from "../Controller/mariadb";
+import { connectToMariaDB, runQuery, runQueries } from "../Controller/mariadb";
 import { PoolConnection } from "mariadb";
 import createTableQueries from "./createTableQueries";
 

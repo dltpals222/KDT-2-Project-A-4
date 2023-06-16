@@ -1,6 +1,7 @@
 import * as React from "react";
 import KOSbox from "./StockChartBlock";
 import StockReco from "./StockReconmendBlock";
+import FinancialChart from "./financialCharts";
 
 
 function MainComp() : JSX.Element {
@@ -8,6 +9,7 @@ function MainComp() : JSX.Element {
         <div>
             <KOSbox />
             <StockReco />
+            <FinancialChart />
         </div>
     );
 }

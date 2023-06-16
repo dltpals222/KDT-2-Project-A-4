@@ -28,7 +28,7 @@ const data : DataPoint[] =[
 
 const FinancialChart : React.FC = () => {
   return (
-    <ChartCanvas data={data} width={800} height={400} xAccessor={(d)=> d.date } xScale={scaleTime()} ratio={1} seriesName="Kospi">
+    <ChartCanvas data={data} width={380} height={300} xAccessor={(d)=> d.date } xScale={scaleTime()} ratio={1} seriesName="Kospi">
       <Chart id="kospi-chart" yExtents={(d) => [0,d.price]}>
         <XAxis />
         <YAxis />

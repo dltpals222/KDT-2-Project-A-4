@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Outlet } from "react-router-dom";
 import Navi from "./NavigatorBar";
-import FinancialChart from "./financialCharts";
 
 
 
@@ -10,7 +9,6 @@ function MainPage() : JSX.Element {
         <div>
             <Navi />
             <Outlet />
-            <FinancialChart />
         </div>
     );
 }

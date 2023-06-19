@@ -13,4 +13,6 @@ const result = await runQueries(connection, queries);
 console.log(result);
 }
 
-test();
+console.log(createTableQueries("dgchoi3904"));
+
+// test();

@@ -13,7 +13,9 @@ const FinancialChart : React.FC = () => {
     close : number,
     volume : number,
     day : Date|string,
+    day : Date|string,
   }
+  const [companyDate, setCompanyDate] = useState<CompanyDateType[]>([])
   const [companyDate, setCompanyDate] = useState<CompanyDateType[]>([])
   useEffect(() => {
     const fetchData = async () => {

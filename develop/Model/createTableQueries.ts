@@ -90,12 +90,15 @@ function createTriggerUpdateStockBalance(userid: string): string {
 AFTER INSERT ON \`${userid}_account\` FOR EACH ROW
 BEGIN
   DECLARE stockCount INT;
+  DECLARE compName VARCHAR(50);   
 
   -- Check if shareBuyoutCount is not null and positive
   IF NEW.shareBuyoutCount IS NOT NULL AND NEW.shareBuyoutCount > 0 THEN
     -- Get stock count for the company code
     SELECT stockBalance INTO stockCount FROM \`${userid}_stocks\` WHERE stockCode = NEW.companyCode;
-    
+    -- Get stock Name by the company code
+    SELECT \`name\` INTO compName FROM \`companylist\` WHERE \`code\` = NEW.companyCode;        	 	     
+
     IF stockCount IS NOT NULL THEN
       -- Update existing stock record
       UPDATE \`${userid}_stocks\` SET stockBalance = stockBalance + NEW.shareBuyoutCount WHERE stockCode = NEW.companyCode;
@@ -103,6 +106,8 @@ BEGIN
       -- Insert new stock record
       INSERT INTO \`${userid}_stocks\` (stockCode, stockBalance) VALUES (NEW.companyCode, NEW.shareBuyoutCount);
     END IF;
+    -- Update company name of stock record
+    UPDATE \`test01_stocks\` SET stockName = compName WHERE stockCode = NEW.companyCode;
   END IF;
 
   -- Check if shareSelloutCount is not null and positive
@@ -148,6 +153,6 @@ END;
 
 }
 function insertSeedMoney(userid:string):string {
-  const insertSeedMoneyQueryStr = `INSERT INTO \`${userid}_account\`(\`accountDeposit\`, \`companyCode\`) VALUES (1000000, 000000 )`;
+  const insertSeedMoneyQueryStr = `INSERT INTO \`${userid}_account\`(\`accountDeposit\`, \`companyCode\`) VALUES (1000000, 000000 ) `;
   return insertSeedMoneyQueryStr;
 }

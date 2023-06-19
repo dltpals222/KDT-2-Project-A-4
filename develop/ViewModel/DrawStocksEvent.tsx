@@ -9,15 +9,15 @@ function DrawEvent() {
   const [count, setCount] = useState<number>(0);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false)
 
-  //클릭시 5번의 횟수 제한 + 버튼 잠금 만들어야함 
   useEffect(()=>{
     //기본 input을 주어지게 하기 위해 input을 하나 생성
     setInputs([...inputs, ""]);
     const sessionUserIdDraw = sessionStorage.getItem("sessionId")
     const storageKey = `drawClickedButtonDate_${sessionUserIdDraw}`
     const saveDate = sessionStorage.getItem(storageKey);
-    // const currentDate = new Date().toLocaleDateString();
-    const currentDate = "2023-06-11";
+    const currentDate = new Date().toLocaleDateString();
+    //테스트 하기 위한 날짜 직접지정
+    // const currentDate = "2023-06-11";
     
     //날짜가 동일할시 버튼 disabled
     if(saveDate === currentDate){
@@ -73,18 +73,20 @@ function DrawEvent() {
       setCount(count => count+1)
     }
   };
-  //사용자 입력 값을 랜덤으로 하나 뽑기 위한 로직 (미완성)
+  //사용자 입력 값을 랜덤으로 하나 뽑기 위한 로직
   const handleRandomStocks  = ()=> {
     const randomStocksIndex : number = Math.floor(Math.random() * outputs.length);
     const randomStocks = outputs[randomStocksIndex]
     return [randomStocks];
   };
+  //count가 >= 면 버튼 비활성화 
   useEffect(() => {
     if(count >= 5 ){
       setButtonDisabled(true)
       localStorage.setItem("DrawStocksButtonClicked","true")
     }
   },[count])
+
   interface stocksType{
     stock : string[]
   }

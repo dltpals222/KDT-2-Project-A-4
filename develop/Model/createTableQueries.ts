@@ -73,13 +73,13 @@ function newStocksTable(userid: string): string {
  */
 export default function createTableQueries(userid: string): string[] {
   const queries: string[] = new Array();
-  //쿼리가 처리되는 순서는 가장 마지막 인덱스부터 0까지, 역순.
-  queries.push(createTriggerUpdateStockBalance(userid));
-  queries.push(createTriggerUptateBalance(userid));
+  //쿼리가 처리되는 순서는 역순 아님, 0 부터 마지막 인덱스이다.
   queries.push(newAccountTable(userid));
   queries.push(newStocksTable(userid));
   queries.push(newTodayLuckTable(userid));
   queries.push(newGachaTable(userid));
+  queries.push(createTriggerUpdateStockBalance(userid));
+  queries.push(createTriggerUptateBalance(userid));
   
   return queries;
 }

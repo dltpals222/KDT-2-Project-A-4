@@ -1,5 +1,5 @@
 function newAccountTable(userid: string): string {
-  const createAccountTableQuery = `CREATE TABLE \`${userid}_account\` (
+  const createAccountTableQuery = `CREATE TABLE IF NOT EXISTS \`${userid}_account\` (
     \`accountIndex\` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '계좌 인덱스',
     \`accountDate\` TIMESTAMP NULL DEFAULT current_timestamp() COMMENT '거래 날짜',
     \`accountDeposit\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '입금 기록',
@@ -22,7 +22,7 @@ function newAccountTable(userid: string): string {
 }
 
 function newGachaTable(userid: string): string {
-  const createGachaTableQuery = `CREATE TABLE \`${userid}_gacha\` (
+  const createGachaTableQuery = `CREATE TABLE IF NOT EXISTS \`${userid}_gacha\` (
           \`gachaIndex\` INT(10) NOT NULL AUTO_INCREMENT COMMENT '가챠 인덱스',
           \`gachaDate\` TIMESTAMP NOT NULL DEFAULT current_timestamp() COMMENT '가챠 날짜',
           \`gachaList\` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '가챠 리스트' COLLATE 'utf8mb4_unicode_ci',
@@ -37,7 +37,7 @@ function newGachaTable(userid: string): string {
   return createGachaTableQuery;
 }
 function newTodayLuckTable(userid: string): string {
-  const createTodayLuckTableQuery = `CREATE TABLE \`${userid}_todayluck\` (
+  const createTodayLuckTableQuery = `CREATE TABLE IF NOT EXISTS \`${userid}_todayluck\` (
           \`todayDate\` TIMESTAMP NULL DEFAULT current_timestamp() COMMENT '운세 날짜',
           \`todayLuck\` VARCHAR(6) NOT NULL COMMENT '운세 결과' COLLATE 'utf8mb4_unicode_ci',
           \`todayMessage\` VARCHAR(150) NOT NULL COMMENT '운세 설명' COLLATE 'utf8mb4_unicode_ci'
@@ -51,7 +51,7 @@ function newTodayLuckTable(userid: string): string {
 }
 
 function newStocksTable(userid: string): string {
-  const createStockTableQuery = `CREATE TABLE \`${userid}_stocks\` (
+  const createStockTableQuery = `CREATE TABLE IF NOT EXISTS \`${userid}_stocks\` (
         \`stockCode\` VARCHAR(15) NOT NULL DEFAULT '' COLLATE 'utf8mb3_general_ci',
         \`stockName\` VARCHAR(50) NULL DEFAULT '' COLLATE 'utf8mb3_general_ci',
         \`stockBalance\` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '보유 주식 양',
@@ -85,7 +85,7 @@ export default function createTableQueries(userid: string): string[] {
 }
 
 function createTriggerUpdateStockBalance(userid: string): string {
-  const createTriggerUpdateStockBalanceStr = `CREATE TRIGGER update_stock_balance_trigger
+  const createTriggerUpdateStockBalanceStr = `CREATE TRIGGER IF NOT EXISTS ${userid}_update_stock_balance_trigger
 AFTER INSERT ON \`${userid}_account\` FOR EACH ROW
 BEGIN
   DECLARE stockCount INT;
@@ -118,7 +118,7 @@ END`
   return createTriggerUpdateStockBalanceStr;
 }
 function createTriggerUptateBalance(userid:string):string{
-const createTriggerUpdateBalanceStr = `CREATE TRIGGER update_balance_trigger
+const createTriggerUpdateBalanceStr = `CREATE TRIGGER IF NOT EXISTS ${userid}_update_account_balance_trigger
   AFTER INSERT ON \`${userid}_account\` FOR EACH ROW
   BEGIN
     IF NEW.accountDeposit IS NOT NULL THEN

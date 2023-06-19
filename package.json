@@ -5,11 +5,8 @@
   "main": "Router.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch",
-    "start": "webpack-dev-server --mode=development --open",
-    "build": "webpack --mode=production --node-env=production"
+    "start": "node ./dist/server_bundle.js",
+    "build": "npx webpack"
   },
   "repository": {
     "type": "git",

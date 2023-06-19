@@ -4,7 +4,7 @@ import {ApexOptions} from "apexcharts"
 
 
 interface ChartData {
-  data: { x: Date; y: number[] }[];
+  data: { x: Date, y: number[] }[];
 }
 
 interface CompanyDateType {
@@ -25,16 +25,39 @@ const ApexChart: React.FC = () => {
     fetch('/api/chart')
     .then(response => response.json())
     .then(result => {
-      result[0].map((element : CompanyDateType) => {
-        return {
+      const resultData : ChartData = { data : 
+      result[0].map((element : CompanyDateType) => 
+        (
+          
+          { 
           x : new Date(element.day),
           y : [element.open, element.high, element.low, element.close]
-        }
+        }))
+      }
+      setSeries([resultData])
       })
-    })
+      const chartOptionValue : ApexOptions = {
+        chart: {
+          type: 'candlestick',
+          height: 350,
+        },
+        title: {
+          text: '삼성 차트',
+          align: 'left',
+        },
+        xaxis: {
+          type: 'datetime',
+        },
+        yaxis: {
+          tooltip: {
+            enabled: true,
+          },
+        },
+      }
     
-    const companyData = 
-  },[])
+      setOptions(chartOptionValue)
+    },[])
+    
 
 
     // {

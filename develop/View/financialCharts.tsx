@@ -25,7 +25,6 @@ const FinancialChart : React.FC = (props) => {
           element.day = formattedDay; 
           return {...element, day:formattedDay}
           });
-          console.log(typeof(formattedData[0].day),formattedData)
           setCompanyDate(formattedData)
         } catch (error){
           console.error("차트 데이터 에러 발생", error)

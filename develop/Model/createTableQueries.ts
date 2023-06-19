@@ -1,5 +1,6 @@
 function newAccountTable(userid: string): string {
-  const createAccountTableQuery = `CREATE TABLE \`${userid}_account\` (
+  const createAccountTableQuery = `DELIMITER //
+  CREATE TABLE \`${userid}_account\` (
     \`accountIndex\` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '계좌 인덱스',
     \`accountDate\` TIMESTAMP NULL DEFAULT current_timestamp() COMMENT '거래 날짜',
     \`accountDeposit\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '입금 기록',
@@ -17,25 +18,24 @@ function newAccountTable(userid: string): string {
   COMMENT='${userid} 사용자용 모의투자 계좌.'
   COLLATE='utf8mb4_unicode_ci'
   ENGINE=InnoDB
-  ;
+  //
   
-  DELIMITER //
   CREATE TRIGGER update_balance_trigger
   AFTER INSERT ON \`${userid}_account\` FOR EACH ROW
   BEGIN
     IF NEW.accountDeposit IS NOT NULL THEN
-      UPDATE \`${userid}_account\` SET accountBalance = accountBalance + NEW.accountDeposit WHERE accountIndex = NEW.accountIndex;
+      UPDATE \`${userid}_account\` SET NEW.accountBalance = accountBalance + NEW.accountDeposit WHERE accountIndex = NEW.accountIndex;
     END IF;
     IF NEW.accountWithdraw IS NOT NULL THEN
-      UPDATE \`${userid}_account\` SET accountBalance = accountBalance - NEW.accountWithdraw WHERE accountIndex = NEW.accountIndex;
+      UPDATE \`${userid}_account\` SET NEW.accountBalance = accountBalance - NEW.accountWithdraw WHERE accountIndex = NEW.accountIndex;
     END IF;
-  END //
-
+  END//
+  
   CREATE TRIGGER update_stock_balance_trigger
   AFTER INSERT ON \`${userid}_account\` FOR EACH ROW
   BEGIN
     DECLARE stockCount INT;
-
+  
     -- Check if shareBuyoutCount is not null and positive
     IF NEW.shareBuyoutCount IS NOT NULL AND NEW.shareBuyoutCount > 0 THEN
       -- Get stock count for the company code
@@ -49,7 +49,7 @@ function newAccountTable(userid: string): string {
         INSERT INTO \`${userid}_stocks\` (stockCode, stockBalance) VALUES (NEW.companyCode, NEW.shareBuyoutCount);
       END IF;
     END IF;
-
+  
     -- Check if shareSelloutCount is not null and positive
     IF NEW.shareSelloutCount IS NOT NULL AND NEW.shareSelloutCount > 0 THEN
       -- Get stock count for the company code
@@ -60,10 +60,9 @@ function newAccountTable(userid: string): string {
         UPDATE \`${userid}_stocks\` SET stockBalance = stockBalance - NEW.shareSelloutCount WHERE stockCode = NEW.companyCode;
       END IF;
     END IF;
-  END //
-
-  DELIMITER ;
-  `;
+  END//
+  
+  DELIMITER ;`;
   return createAccountTableQuery;
 }
 

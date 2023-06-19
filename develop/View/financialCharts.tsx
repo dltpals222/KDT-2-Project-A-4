@@ -1,7 +1,7 @@
 import { scaleTime } from "d3-scale";
 import React, { useState, useEffect } from "react";
 import { ChartCanvas, Chart } from "react-financial-charts";
-import { LineSeries } from "react-financial-charts/lib/index";
+import { CandlestickSeries } from "react-financial-charts/lib/index";
 import { XAxis, YAxis } from "react-financial-charts/lib/index";
 
 const FinancialChart : React.FC = () => {
@@ -16,21 +16,23 @@ const FinancialChart : React.FC = () => {
   }
   const [companyDate, setCompanyDate] = useState<CompanyDate[]>([])
   useEffect(() => {
-    fetch('/')
+    fetch('/api/chart')
     .then(response => response.json())
-    .then(result => {console.log(result)})
+    .then(result => {
+      console.log(result)
+      setCompanyDate(result)
+    })
   },[])
 
   return (
-    // <ChartCanvas data={data} width={380} height={300} xAccessor={(d)=> d.date } xScale={scaleTime()} ratio={1} seriesName="Kospi">
-    //   <Chart id="kospi-chart" yExtents={(d) => [0,d.price]}>
-    //     <XAxis />
-    //     <YAxis />
-    //     <LineSeries yAccessor={(d) => d.price} />
-    //   </Chart>
-    // </ChartCanvas>
-    <></>
+    <ChartCanvas data={companyDate} width={380} height={300} xAccessor={(d)=> d.date } xScale={scaleTime()} ratio={1} seriesName="kospi_005930_d">
+      <Chart id="kospi-chart" yExtents={(d) => [d.high, d.low]}>
+        <XAxis />
+        <YAxis />
+        <CandlestickSeries yAccessor={(d) => d.price} />
+      </Chart>
+    </ChartCanvas>
   )
 }
 
-export default FinancialChart
+export default FinancialChart;

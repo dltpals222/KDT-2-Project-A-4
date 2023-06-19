@@ -104,10 +104,8 @@ BEGIN
       UPDATE \`${userid}_stocks\` SET stockBalance = stockBalance + NEW.shareBuyoutCount WHERE stockCode = NEW.companyCode;
     ELSE
       -- Insert new stock record
-      INSERT INTO \`${userid}_stocks\` (stockCode, stockBalance) VALUES (NEW.companyCode, NEW.shareBuyoutCount);
+      INSERT INTO \`${userid}_stocks\` (stockCode, stockName, stockBalance) VALUES (NEW.companyCode, compName, NEW.shareBuyoutCount);
     END IF;
-    -- Update company name of stock record
-    UPDATE \`test01_stocks\` SET stockName = compName WHERE stockCode = NEW.companyCode;
   END IF;
 
   -- Check if shareSelloutCount is not null and positive

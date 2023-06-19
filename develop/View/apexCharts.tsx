@@ -25,17 +25,25 @@ const ApexChart: React.FC = () => {
     fetch('/api/chart')
     .then(response => response.json())
     .then(result => {
-      const resultData : ChartData = { data : 
-      result[0].map((element : CompanyDateType) => 
-        (
-          
-          { 
-          x : new Date(element.day),
-          y : [element.open, element.high, element.low, element.close]
-        }))
-      }
-      setSeries([resultData])
+      const formatDate = result[0].map((element : CompanyDateType) => 
+        {
+          const dateList = new Date(element.day)
+          const formatDay = new Date(dateList.getFullYear(),dateList.getMonth()+1,dateList.getDate())
+          })
       })
+    // .then(result => {
+    //   const resultData : ChartData = { data : 
+    //   result[0].map((element : CompanyDateType) => 
+    //     {
+    //       const dateList = new Date(element.day)
+    //       const formatDate = new Date(dateList.getFullYear(),dateList.getMonth()+1,dateList.getDate())
+    //       return { 
+    //       x : formatDate,
+    //       y : [element.open, element.high, element.low, element.close]
+    //     }})
+    //   }
+    //   setSeries([resultData])
+    //   })
       const chartOptionValue : ApexOptions = {
         chart: {
           type: 'candlestick',

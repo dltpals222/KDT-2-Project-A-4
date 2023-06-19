@@ -126,14 +126,14 @@ const createTriggerUpdateBalanceStr = `CREATE TRIGGER IF NOT EXISTS ${userid}_up
   BEFORE INSERT ON \`${userid}_account\` FOR EACH ROW
   BEGIN
     DECLARE currAccountBalance INT;
-    DECLARE currAccountIndex INT;
+    DECLARE latestAccountIndex INT;
   
   -- 최신 행의 인덱스 가져오기
-  SELECT accountIndex INTO currAccountIndex FROM \`${userid}_account\` ORDER BY accountIndex DESC LIMIT 1;
+  SELECT accountIndex INTO latestAccountIndex FROM \`${userid}_account\` ORDER BY accountIndex DESC LIMIT 1;
   
   -- 이전 행이 있는지 확인
-  IF currAccountIndex IS NOT NULL THEN
-      SELECT accountBalance INTO currAccountBalance FROM \`${userid}_account\` WHERE accountIndex = currAccountIndex;
+  IF latestAccountIndex IS NOT NULL THEN
+      SELECT accountBalance INTO currAccountBalance FROM \`${userid}_account\` WHERE accountIndex = latestAccountIndex;
   ELSE
       SET currAccountBalance = 0; -- 이전 행이 없을 경우 초기값 0으로 설정
   END IF;
@@ -151,6 +151,6 @@ END;
 
 }
 function insertSeedMoney(userid:string):string {
-  const insertSeedMoneyQueryStr = `INSERT INTO \`${userid}_account\`(\`accountDeposit\`, \`companyCode\`) VALUES (1000000, 000000 ) `;
+  const insertSeedMoneyQueryStr = `INSERT INTO \`${userid}_account\`(\`accountBalance\`, \`companyCode\`) VALUES (1000000, '000000' ) `;
   return insertSeedMoneyQueryStr;
 }

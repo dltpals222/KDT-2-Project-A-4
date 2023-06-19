@@ -6,7 +6,7 @@ async function test() : Promise<void>{
     let connection : PoolConnection | undefined;
 
 connection = await connectToMariaDB();
-const queries = createTableQueries("dgchoi3904");
+const queries = createTableQueries("admin");
 
 const result = await runQueries(connection, queries);
 

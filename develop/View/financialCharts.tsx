@@ -4,34 +4,51 @@ import { ChartCanvas, Chart } from "react-financial-charts";
 import { CandlestickSeries } from "react-financial-charts/lib/index";
 import { XAxis, YAxis } from "react-financial-charts/lib/index";
 
-const FinancialChart : React.FC = () => {
-  interface CompanyDate {
+const FinancialChart : React.FC = (props) => {
+  interface CompanyDateType {
     no : number,
     open : number,
     high : number,
     low : number,
     close : number,
     volume : number,
-    day : Date,
+    day : Date|string,
   }
-  const [companyDate, setCompanyDate] = useState<CompanyDate[]>([])
+  const [companyDate, setCompanyDate] = useState<CompanyDateType[]>([])
   useEffect(() => {
-    fetch('/api/chart')
-    .then(response => response.json())
-    .then(result => {
-      console.log(result)
-      setCompanyDate(result)
-    })
-  },[])
+    const fetchData = async () => {
+      try{
+        const response = await fetch('/api/chart');
+        const result = await response.json();
+        const formattedData = result[0].map((element:CompanyDateType) => {
+          const formattedDay = new Date(element.day).toISOString().split('T')[0];
+          element.day = formattedDay; 
+          return {...element, day:formattedDay}
+          });
+          console.log(typeof(formattedData[0].day),formattedData)
+          setCompanyDate(formattedData)
+        } catch (error){
+          console.error("차트 데이터 에러 발생", error)
+        }
+      }
+      fetchData()
+  },[props])
 
   return (
-    <ChartCanvas data={companyDate} width={380} height={300} xAccessor={(d)=> d.date } xScale={scaleTime()} ratio={1} seriesName="kospi_005930_d">
+    <ChartCanvas 
+      data={companyDate}
+      width={380}
+      height={300}
+      // xAccessor={(d)=> d.day } 
+      xScale={scaleTime()} 
+      ratio={1} 
+      seriesName="kospi_005930_d"
+    >
       <Chart id="kospi-chart" yExtents={(d) => [d.high, d.low]}>
-        <XAxis />
-        <YAxis />
-        <CandlestickSeries yAccessor={(d) => d.price} />
+        <CandlestickSeries yAccessor={(d) => ({open : d.open, high : d.high,low: d.low,close: d.close})} />
       </Chart>
     </ChartCanvas>
+    // <></>
   )
 }
 

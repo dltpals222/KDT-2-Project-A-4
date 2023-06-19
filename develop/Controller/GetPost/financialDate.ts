@@ -11,6 +11,7 @@ financialDate.get('/api/chart',async(req:Request, res:Response) => {
     connection = await connectToMariaDB();
     const query = ['select * from kospi_005930_d order by day desc limit 60'];
     const result = await runQueries(connection,query);
+    console.log('day의 속성은?' ,result[0][0].day,typeof(result[0][0].day))
     console.log('삼성 정보입니다.' , result)
     res.json(result)
   } catch (error){

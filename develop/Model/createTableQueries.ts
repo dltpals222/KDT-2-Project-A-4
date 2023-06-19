@@ -80,6 +80,7 @@ export default function createTableQueries(userid: string): string[] {
   queries.push(newGachaTable(userid));
   queries.push(createTriggerUpdateStockBalance(userid));
   queries.push(createTriggerUptateBalance(userid));
+  queries.push(insertSeedMoney(userid));
   
   return queries;
 }
@@ -119,14 +120,34 @@ END`
 }
 function createTriggerUptateBalance(userid:string):string{
 const createTriggerUpdateBalanceStr = `CREATE TRIGGER IF NOT EXISTS ${userid}_update_account_balance_trigger
-  AFTER INSERT ON \`${userid}_account\` FOR EACH ROW
+  BEFORE INSERT ON \`${userid}_account\` FOR EACH ROW
   BEGIN
-    IF NEW.accountDeposit IS NOT NULL THEN
-      UPDATE \`${userid}_account\` SET NEW.accountBalance = accountBalance + NEW.accountDeposit WHERE accountIndex = NEW.accountIndex;
-    END IF;
-    IF NEW.accountWithdraw IS NOT NULL THEN
-      UPDATE \`${userid}_account\` SET NEW.accountBalance = accountBalance - NEW.accountWithdraw WHERE accountIndex = NEW.accountIndex;
-    END IF;
-  END`
+    DECLARE currAccountBalance INT;
+    DECLARE currentAccountIndex INT;
+  
+  -- 최신 행의 인덱스 가져오기
+  SELECT accountIndex INTO currAccountIndex FROM \`${userid}_account\` ORDER BY accountIndex DESC LIMIT 1;
+  
+  -- 이전 행이 있는지 확인
+  IF currAccountIndex IS NOT NULL THEN
+      SELECT accountBalance INTO currAccountBalance FROM \`${userid}_account\` WHERE accountIndex = currAccountIndex;
+  ELSE
+      SET currAccountBalance = 0; -- 이전 행이 없을 경우 초기값 0으로 설정
+  END IF;
+  
+	IF NEW.accountDeposit IS NOT NULL THEN
+		SET NEW.accountBalance = currAccountBalance + NEW.accountDeposit;
+	END IF;
+	
+	IF NEW.accountWithdraw IS NOT NULL THEN
+		SET NEW.accountBalance = currAccountBalance - NEW.accountWithdraw;
+	END IF;
+END;
+`
   return createTriggerUpdateBalanceStr;
+
+}
+function insertSeedMoney(userid:string):string {
+  const insertSeedMoneyQueryStr = `INSERT INTO \`${userid}_account\`(\`accountDeposit\`, \`companyCode\`) VALUES (1000000, 000000 )`;
+  return insertSeedMoneyQueryStr;
 }

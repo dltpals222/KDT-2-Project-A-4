@@ -126,7 +126,7 @@ const createTriggerUpdateBalanceStr = `CREATE TRIGGER IF NOT EXISTS ${userid}_up
   BEFORE INSERT ON \`${userid}_account\` FOR EACH ROW
   BEGIN
     DECLARE currAccountBalance INT;
-    DECLARE currentAccountIndex INT;
+    DECLARE currAccountIndex INT;
   
   -- 최신 행의 인덱스 가져오기
   SELECT accountIndex INTO currAccountIndex FROM \`${userid}_account\` ORDER BY accountIndex DESC LIMIT 1;

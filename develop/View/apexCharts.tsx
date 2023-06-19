@@ -25,14 +25,20 @@ const ApexChart: React.FC = () => {
     fetch('/api/chart')
     .then(response => response.json())
     .then(result => {
-      const resultData : ChartData = { data : 
-      result[0].map((element : CompanyDateType) => 
-        (
-          { 
-          x : new Date(element.day),
-          y : [element.open, element.high, element.low, element.close]
-        }))
-      }
+      const resultData: ChartData = {
+        data: result[0].map((element: CompanyDateType) => {
+          const date = new Date(element.day);
+          const formattedDate = new Intl.DateTimeFormat('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          }).format(date);
+          return {
+            x: formattedDate,
+            y: [element.open, element.high, element.low, element.close],
+          };
+        }),
+      };
       setSeries([resultData])
       })
       const chartOptionValue : ApexOptions = {

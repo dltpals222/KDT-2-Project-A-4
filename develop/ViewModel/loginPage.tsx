@@ -11,8 +11,20 @@ function LoginPage(): JSX.Element {
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",
-    height: "80%",
   };
+  const loginBox: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop : "16px",
+  }
+  const logo: CSSProperties = {
+    marginTop : "30px",
+    marginBottom : "30px"
+  }
+  const loginButton : CSSProperties ={
+    marginTop : "16px",
+  }
   
   // 목표 : 코드내 레거시 코드, 주석, 변수명 수정하기.
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
@@ -48,8 +60,8 @@ function LoginPage(): JSX.Element {
 
   return (
     <div style={container}>
-      <div id="logo">운에 맡겨라! 모의투자</div>
-      <form method="POST" onSubmit={handleSubmit} style={container}>
+      <div id="logo" style={logo}>주식,<br/>운과 만나다.</div>
+      <form method="POST" onSubmit={handleSubmit} style={loginBox}>
         <label htmlFor="id">
           <input
             type="text"
@@ -74,7 +86,7 @@ function LoginPage(): JSX.Element {
             }
           />
         </label>
-        <button type="submit">로그인</button>
+        <button type="submit" style={loginButton}>로그인</button>
       </form>
       <button type="button" onClick={() => {navigate("/signup")}}>회원가입</button>
     </div>

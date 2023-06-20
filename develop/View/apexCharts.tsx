@@ -63,35 +63,6 @@ const ApexChart: React.FC = () => {
       setOptions(chartOptionValue)
     },[])
     
-
-
-    // {
-    //   data: [ 
-    //       {
-    //         x: new Date(1538884800000),
-    //         y: [6604.98, 6606, 6604.07, 6606]
-    //       },
-    //     ]
-    //   }
-  //   chart: {
-  //     type: 'candlestick',
-  //     height: 350,
-  //   },
-  //   title: {
-  //     text: 'CandleStick Chart',
-  //     align: 'left',
-  //   },
-  //   xaxis: {
-  //     type: 'datetime',
-  //   },
-  //   yaxis: {
-  //     tooltip: {
-  //       enabled: true,
-  //     },
-  //   },
-  // });
-    
-    
   return (
     <div id="chart">
       <ReactApexChart

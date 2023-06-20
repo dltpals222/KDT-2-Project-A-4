@@ -12,8 +12,20 @@ function SignUpPage() {
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",
-    height: "80%",
   };
+  const signUpBox: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop : "16px",
+  }
+  const logo: CSSProperties = {
+    marginTop : "30px",
+    marginBottom : "30px"
+  }
+  const signUpButton : CSSProperties ={
+    marginTop : "16px",
+  }
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     const data = { id, pwd, pwdConfirm };
@@ -54,8 +66,8 @@ function SignUpPage() {
 
   return (
     <div style={container}>
-      <div id="logo">회원가입</div>
-      <form method="POST" onSubmit={handleSubmit} style={container}>
+      <div id="logo" style={logo}>회원가입</div>
+      <form method="POST" onSubmit={handleSubmit} style={signUpBox}>
         <label htmlFor="id">
           <input
             type="text"
@@ -92,7 +104,7 @@ function SignUpPage() {
             }
           />
         </label>
-        <button type="submit">회원가입</button>
+        <button type="submit" style={signUpButton}>회원가입</button>
       </form>
     </div>
   );

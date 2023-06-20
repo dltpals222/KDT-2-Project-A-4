@@ -94,7 +94,7 @@ function DrawEvent() {
   const PropsComponent: React.FC<stocksType> = ({ stock }) => {
     return (
       <div>
-        {stock.length > 0 ? <div>{inputs.length}개의 종목 중 하나인 <span style={{fontSize : "2em", fontWeight : 800}}> {stock} </span>당첨!!!</div> : <div />}
+        {stock.length > 0 && <div>{inputs.length}개의 종목 중 하나인 <span style={{fontSize : "2em", fontWeight : 800}}> {stock} </span>당첨!!!</div>}
         {/* <div>{`${stock}`.length > 0 &&`${inputs.length}개의 종목 중 하나인 ${stock} 당첨!!!`}</div> */}
       </div>
     );

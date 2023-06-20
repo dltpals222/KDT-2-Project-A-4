@@ -8,7 +8,10 @@ function MainComp() : JSX.Element {
     return (
         <div>
             <KOSbox />
+            <br />
             <StockReco />
+            <br />
+            <br />
             <ApexChart />
         </div>
     );

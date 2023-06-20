@@ -116,6 +116,8 @@ function DrawEvent() {
             />
           </div>
         ))}
+        <br />
+        <br />
       <button type="button" onClick={handleCreate}>
         종목 생성
       </button>
@@ -124,10 +126,14 @@ function DrawEvent() {
       </button>
         <button type="submit" disabled={buttonDisabled} >종목 뽑기</button>
       </form>
+      <br />
+      <br />
       <div>
       {outputs.map((output, index) => (
         <div key={index}>입력한 주식 종목: {output}</div>
       ))}
+      <br />
+      <br />
         {showMessage&& <PropsComponent stock={handleRandomStocks()} />}
         {error && <h1 style={{color : "red"}}>{error}</h1>}
 

@@ -32,17 +32,21 @@ const CompanyStockInfo: React.FC = () => {
       });
   }, []);
 
-
+  const divStyle = {
+    display : "flex",
+    justifyContent : "space-evenly"
+  }
 
   return (
     <div>
-      <h1>시작 가격 : {companyData[0]?.[0]?.open} 원</h1>
-      <h2>회사이름 : 삼성전자 </h2>
-      <h3>회사 코드 : 005930 </h3>
-      <div>전일 종료 가격 : {companyData[0]?.[1]?.close} 원</div>
-      <div>최고 가격 : {companyData[0]?.[0]?.high} 원</div>
-      <div>최저 가격 : {companyData[0]?.[0]?.low} 원</div>
-      <div>거래량 : {companyData[0]?.[0]?.volume}건</div>
+      <h1> 삼성전자 <span style={{fontSize : "0.5em"}}>  005930</span> <span style={{fontSize : "1.5em"}}><br />{companyData[0]?.[0]?.open} </span>원</h1>
+      {/* <h3> 005930 </h3> */}
+      <div style={{width : "390px"}}>
+        <div style={divStyle}><div style={{width : "150px"}}>전일 종료 가격</div><div style={{width : "240px"}}>{companyData[0]?.[1]?.close} 원</div>  </div>
+        <div style={divStyle}><div style={{width : "150px"}}>최고 가격</div><div style={{width : "240px"}}>{companyData[0]?.[0]?.high} 원</div> </div>
+        <div style={divStyle}><div style={{width : "150px"}}>최저 가격</div><div style={{width : "240px"}}>{companyData[0]?.[0]?.low} 원</div>  </div>
+        <div style={divStyle}><div style={{width : "150px"}}>거래량</div><div style={{width : "240px"}}>{companyData[0]?.[0]?.volume}건</div>  </div>
+      </div>
     </div>
   );
 };

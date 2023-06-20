@@ -15,7 +15,7 @@ function Navi() : JSX.Element {
 
   return  (
          <nav style={navStyle}>
-            <Link to="main">
+            <Link to="">
             <button type="button">메인페이지</button>
             </Link>
             <Link to="search">

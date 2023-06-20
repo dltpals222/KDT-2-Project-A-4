@@ -4,7 +4,7 @@ function newAccountTable(userid: string): string {
     \`accountDate\` TIMESTAMP NULL DEFAULT current_timestamp() COMMENT '거래 날짜',
     \`accountDeposit\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '입금 기록',
     \`accountWithdraw\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '출금 기록',
-    \`accountBalance\` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '계좌 잔액',
+    \`accountBalance\` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0' COMMENT '계좌 잔액',
     \`companyCode\` VARCHAR(15) NOT NULL DEFAULT '' COMMENT '거래한 회사 주 코드' COLLATE 'utf8mb3_general_ci',
     \`shareBuyoutCount\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매수 량',
     \`shareBuyoutPrice\` INT(10) UNSIGNED NULL DEFAULT NULL COMMENT '주식 매수 단가',

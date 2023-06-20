@@ -94,7 +94,7 @@ function SignUpPage() {
         </label>
         <label htmlFor="password_confirm">
           <input
-            type="password_confirm"
+            type="password"
             id="password_confirm"
             placeholder="password를 다시 입력하세요"
             name="password_confirm"

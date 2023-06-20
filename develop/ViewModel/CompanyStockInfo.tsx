@@ -47,6 +47,8 @@ const CompanyStockInfo: React.FC = () => {
         <div style={divStyle}><div style={{width : "150px"}}>최저 가격</div><div style={{width : "240px"}}>{companyData[0]?.[0]?.low} 원</div>  </div>
         <div style={divStyle}><div style={{width : "150px"}}>거래량</div><div style={{width : "240px"}}>{companyData[0]?.[0]?.volume}건</div>  </div>
       </div>
+      <br/>
+      <br/>
     </div>
   );
 };

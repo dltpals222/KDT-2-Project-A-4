@@ -70,6 +70,7 @@ const ApexChart: React.FC = () => {
         series={series}
         type="candlestick"
         height={350}
+        width={380}
       />
     </div>
   );

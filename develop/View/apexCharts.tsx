@@ -25,8 +25,9 @@ const ApexChart: React.FC = () => {
     fetch('/api/chart')
     .then(response => response.json())
     .then(result => {
+      const reverseResult = result[0].reverse()
       const resultData: ChartData = {
-        data: result[0].map((element: CompanyDateType) => {
+        data: reverseResult.map((element: CompanyDateType) => {
           const date = new Date(element.day);
           const formattedDate = new Intl.DateTimeFormat('ko-KR', {
             year: 'numeric',

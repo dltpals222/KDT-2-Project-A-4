@@ -2,7 +2,7 @@ const path = require("path");
 
 const clientConfig = {
     entry: path.resolve(__dirname, "develop", "Controller","main.tsx"),
-    mode: "development",
+    mode:  "development",
     module: {
         rules: [
             //바벨로더
@@ -29,7 +29,16 @@ const clientConfig = {
     },
     output: {
         filename: "main.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
+        publicPath : "/static/"
+    },
+    devServer : {
+        static : path.join(__dirname, "dist"),
+        compress : true,
+        historyApiFallback : true,
+        port : 8080,
+        hot : true,
+        open: true,
     },
 };
 const serverConfig = {
